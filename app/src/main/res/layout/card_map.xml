@@ -9,9 +9,10 @@
     app:cardElevation="3dp"
     app:cardCornerRadius="6dp"
     android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp">
+    android:layout_marginBottom="16dp"
+    android:layout_marginLeft="24dp"
+    android:layout_marginRight="24dp"
+    app:cardBackgroundColor="@color/colorGreen">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -35,21 +36,24 @@
             style="@android:style/TextAppearance.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginStart="16dp"
             android:text="TextView"
             app:layout_constraintBottom_toTopOf="@+id/description"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="#ffffff"/>
 
         <TextView
             android:id="@+id/description"
             style="@android:style/TextAppearance.Small"
             android:layout_width="wrap_content"
             android:layout_height="17dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="16dp"
             android:text="TextView"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="#ffffff"/>
 
     </android.support.constraint.ConstraintLayout>
 
