@@ -3,6 +3,12 @@
     <string name="general_tab">General</string>
     <string name="history_tab">History</string>
 
+    <string name="id_number">ID Number</string>
+    <string name="id_hint">17-004-001</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="forgot_password">Forgot Password?</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
