@@ -1,0 +1,41 @@
+{
+  "project_info": {
+    "project_number": "559503614993",
+    "firebase_url": "https://x8-voltaic-range-g.firebaseio.com",
+    "project_id": "x8-voltaic-range-g"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:559503614993:android:4ced93d6b8496a7c",
+        "android_client_info": {
+          "package_name": "com.platacode.chronos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "559503614993-r3566npin4orrilvrjs67v1df6laifrh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCi_RiihfZrWTMvlwuKW_iGHbmYwSsGiw4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

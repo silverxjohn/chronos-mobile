@@ -12,7 +12,7 @@
     android:layout_marginBottom="16dp"
     android:layout_marginLeft="24dp"
     android:layout_marginRight="24dp"
-    app:cardBackgroundColor="@color/colorGreen">
+    app:cardBackgroundColor="@color/colorGray">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -41,7 +41,7 @@
             android:text="TextView"
             app:layout_constraintBottom_toTopOf="@+id/description"
             app:layout_constraintStart_toStartOf="parent"
-            android:textColor="#ffffff"/>
+            android:textColor="@color/colorWhite"/>
 
         <TextView
             android:id="@+id/description"
@@ -53,7 +53,7 @@
             android:text="TextView"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:textColor="#ffffff"/>
+            android:textColor="@color/colorWhite"/>
 
     </android.support.constraint.ConstraintLayout>
 
