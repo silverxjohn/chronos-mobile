@@ -1,6 +1,9 @@
 package com.platacode.chronos.Models;
 
-public class Parent {
+import com.platacode.chronos.App;
+import com.platacode.chronos.R;
+
+public class Parent extends Model {
     private String parent_id;
     private String first_name;
     private String last_name;
@@ -20,27 +23,27 @@ public class Parent {
     public Parent() {
     }
 
-    public String getParentId() {
+    public String getParent_id() {
         return parent_id;
     }
 
-    public void setParentId(String parent_id) {
+    public void setParent_id(String parent_id) {
         this.parent_id = parent_id;
     }
 
-    public String getFirstName() {
+    public String getFirst_name() {
         return first_name;
     }
 
-    public void setFirstName(String first_name) {
+    public void setFirst_name(String first_name) {
         this.first_name = first_name;
     }
 
-    public String getLastName() {
+    public String getLast_name() {
         return last_name;
     }
 
-    public void setLastName(String last_name) {
+    public void setLast_name(String last_name) {
         this.last_name = last_name;
     }
 
@@ -60,11 +63,11 @@ public class Parent {
         this.email = email;
     }
 
-    public String getStudentId() {
+    public String getStudent_id() {
         return student_id;
     }
 
-    public void setStudentId(String student_id) {
+    public void setStudent_id(String student_id) {
         this.student_id = student_id;
     }
 
@@ -78,5 +81,15 @@ public class Parent {
                 ", email='" + email + '\'' +
                 ", student_id='" + student_id + '\'' +
                 '}';
+    }
+
+    @Override
+    String getDbNode() {
+        return App.getContext().getString(R.string.node_parents);
+    }
+
+    @Override
+    String getIdentifier() {
+        return getParent_id();
     }
 }

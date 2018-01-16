@@ -1,7 +1,9 @@
 package com.platacode.chronos.Models;
 
-public class Teacher
-{
+import com.platacode.chronos.App;
+import com.platacode.chronos.R;
+
+public class Teacher extends Model {
     private String teacher_id;
     private String first_name;
     private String last_name;
@@ -19,15 +21,15 @@ public class Teacher
     public Teacher() {
     }
 
-    public String getTeacherId() {
+    public String getTeacher_id() {
         return teacher_id;
     }
 
-    public void setTeacherId(String teacher_id) {
+    public void setTeacher_id(String teacher_id) {
         this.teacher_id = teacher_id;
     }
 
-    public String getFirstName() {
+    public String getFirst_name() {
         return first_name;
     }
 
@@ -68,5 +70,15 @@ public class Teacher
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 '}';
+    }
+
+    @Override
+    String getDbNode() {
+        return App.getContext().getString(R.string.node_teachers);
+    }
+
+    @Override
+    String getIdentifier() {
+        return getTeacher_id();
     }
 }

@@ -1,6 +1,9 @@
 package com.platacode.chronos.Models;
 
-public class Room {
+import com.platacode.chronos.App;
+import com.platacode.chronos.R;
+
+public class Room extends Model {
     private String room_id;
     private String number;
     private String college_id;
@@ -14,11 +17,11 @@ public class Room {
     public Room() {
     }
 
-    public String getRoomId() {
+    public String getRoom_id() {
         return room_id;
     }
 
-    public void setRoomId(String room_id) {
+    public void setRoom_id(String room_id) {
         this.room_id = room_id;
     }
 
@@ -30,11 +33,11 @@ public class Room {
         this.number = number;
     }
 
-    public String getCollegeId() {
+    public String getCollege_id() {
         return college_id;
     }
 
-    public void setCollegeId(String college_id) {
+    public void setCollege_id(String college_id) {
         this.college_id = college_id;
     }
 
@@ -45,5 +48,15 @@ public class Room {
                 ", number='" + number + '\'' +
                 ", college_id='" + college_id + '\'' +
                 '}';
+    }
+
+    @Override
+    String getDbNode() {
+        return App.getContext().getString(R.string.node_rooms);
+    }
+
+    @Override
+    String getIdentifier() {
+        return getRoom_id();
     }
 }

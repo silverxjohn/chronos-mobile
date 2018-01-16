@@ -1,6 +1,9 @@
 package com.platacode.chronos.Models;
 
-public class College {
+import com.platacode.chronos.App;
+import com.platacode.chronos.R;
+
+public class College extends Model {
     private String college_id;
     private String name;
 
@@ -12,11 +15,11 @@ public class College {
     public College() {
     }
 
-    public String getCollegeId() {
+    public String getCollege_id() {
         return college_id;
     }
 
-    public void setCollegeId(String college_id) {
+    public void setCollege_id(String college_id) {
         this.college_id = college_id;
     }
 
@@ -34,5 +37,15 @@ public class College {
                 "college_id='" + college_id + '\'' +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    String getDbNode() {
+        return App.getContext().getString(R.string.node_colleges);
+    }
+
+    @Override
+    String getIdentifier() {
+        return getCollege_id();
     }
 }

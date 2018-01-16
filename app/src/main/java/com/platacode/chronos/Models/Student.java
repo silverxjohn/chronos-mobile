@@ -1,6 +1,9 @@
 package com.platacode.chronos.Models;
 
-public class Student {
+import com.platacode.chronos.App;
+import com.platacode.chronos.R;
+
+public class Student extends Model {
     private String student_id;
     private String id_number;
     private String first_name;
@@ -22,35 +25,35 @@ public class Student {
     public Student() {
     }
 
-    public String getStudentId() {
+    public String getStudent_id() {
         return student_id;
     }
 
-    public void setStudentId(String student_id) {
+    public void setStudent_id(String student_id) {
         this.student_id = student_id;
     }
 
-    public String getFirstName() {
+    public String getFirst_name() {
         return first_name;
     }
 
-    public void setFirstName(String first_name) {
+    public void setFirst_name(String first_name) {
         this.first_name = first_name;
     }
 
-    public String getMiddleName() {
+    public String getMiddle_name() {
         return middle_name;
     }
 
-    public void setMiddleName(String middle_name) {
+    public void setMiddle_name(String middle_name) {
         this.middle_name = middle_name;
     }
 
-    public String getLastName() {
+    public String getLast_name() {
         return last_name;
     }
 
-    public void setLastName(String last_name) {
+    public void setLast_name(String last_name) {
         this.last_name = last_name;
     }
 
@@ -70,11 +73,11 @@ public class Student {
         this.phone = phone;
     }
 
-    public String getIdNumber() {
+    public String getId_number() {
         return id_number;
     }
 
-    public void setIdNumber(String id_number) {
+    public void setId_number(String id_number) {
         this.id_number = id_number;
     }
 
@@ -89,5 +92,15 @@ public class Student {
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 '}';
+    }
+
+    @Override
+    String getDbNode() {
+        return App.getContext().getString(R.string.node_students);
+    }
+
+    @Override
+    String getIdentifier() {
+        return getStudent_id();
     }
 }

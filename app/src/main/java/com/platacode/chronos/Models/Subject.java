@@ -1,6 +1,9 @@
 package com.platacode.chronos.Models;
 
-public class Subject {
+import com.platacode.chronos.App;
+import com.platacode.chronos.R;
+
+public class Subject extends Model {
     private String subject_id;
     private String name;
     private String description;
@@ -16,11 +19,11 @@ public class Subject {
     public Subject() {
     }
 
-    public String getSubjectId() {
+    public String getSubject_id() {
         return subject_id;
     }
 
-    public void setSubjectId(String subject_id) {
+    public void setSubject_id(String subject_id) {
         this.subject_id = subject_id;
     }
 
@@ -56,5 +59,15 @@ public class Subject {
                 ", description='" + description + '\'' +
                 ", units='" + units + '\'' +
                 '}';
+    }
+
+    @Override
+    String getDbNode() {
+        return App.getContext().getString(R.string.node_subjects);
+    }
+
+    @Override
+    String getIdentifier() {
+        return getSubject_id();
     }
 }

@@ -1,6 +1,9 @@
 package com.platacode.chronos.Models;
 
-public class Class {
+import com.platacode.chronos.App;
+import com.platacode.chronos.R;
+
+public class Class extends Model {
     private String class_id;
     private String teacher_id;
     private String room_id;
@@ -20,51 +23,51 @@ public class Class {
     public Class() {
     }
 
-    public String getClassId() {
+    public String getClass_id() {
         return class_id;
     }
 
-    public void setClassId(String class_id) {
+    public void setClass_id(String class_id) {
         this.class_id = class_id;
     }
 
-    public String getTeacherId() {
+    public String getTeacher_id() {
         return teacher_id;
     }
 
-    public void setTeacherId(String teacher_id) {
+    public void setTeacher_id(String teacher_id) {
         this.teacher_id = teacher_id;
     }
 
-    public String getRoomId() {
+    public String getRoom_id() {
         return room_id;
     }
 
-    public void setRoomId(String room_id) {
+    public void setRoom_id(String room_id) {
         this.room_id = room_id;
     }
 
-    public String getDayId() {
+    public String getDay_id() {
         return day_id;
     }
 
-    public void setDayId(String day_id) {
+    public void setDay_id(String day_id) {
         this.day_id = day_id;
     }
 
-    public String getTimeId() {
+    public String getTime_id() {
         return time_id;
     }
 
-    public void setTimeId(String time_id) {
+    public void setTime_id(String time_id) {
         this.time_id = time_id;
     }
 
-    public String getSubjectId() {
+    public String getSubject_id() {
         return subject_id;
     }
 
-    public void setSubjectId(String subject_id) {
+    public void setSubject_id(String subject_id) {
         this.subject_id = subject_id;
     }
 
@@ -78,5 +81,15 @@ public class Class {
                 ", time_id='" + time_id + '\'' +
                 ", subject_id='" + subject_id + '\'' +
                 '}';
+    }
+
+    @Override
+    String getDbNode() {
+        return App.getContext().getString(R.string.node_classes);
+    }
+
+    @Override
+    String getIdentifier() {
+        return getClass_id();
     }
 }

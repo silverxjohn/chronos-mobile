@@ -1,6 +1,9 @@
 package com.platacode.chronos.Models;
 
-public class Time {
+import com.platacode.chronos.App;
+import com.platacode.chronos.R;
+
+public class Time extends Model {
     public static final String AM_6_7 = "1";
     public static final String AM_7_8 = "2";
     public static final String AM_8_9 = "3";
@@ -27,11 +30,11 @@ public class Time {
     public Time() {
     }
 
-    public String getTimeId() {
+    public String getTime_id() {
         return time_id;
     }
 
-    public void setTimeId(String time_id) {
+    public void setTime_id(String time_id) {
         this.time_id = time_id;
     }
 
@@ -49,5 +52,15 @@ public class Time {
                 "time_id='" + time_id + '\'' +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    String getDbNode() {
+        return App.getContext().getString(R.string.node_times);
+    }
+
+    @Override
+    String getIdentifier() {
+        return getTime_id();
     }
 }

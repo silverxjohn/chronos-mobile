@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="node_classes">classes</string>
+    <string name="node_colleges">colleges</string>
+    <string name="node_days">days</string>
+    <string name="node_parents">parents</string>
+    <string name="node_rooms">rooms</string>
+    <string name="node_students">students</string>
+    <string name="node_subjects">subjects</string>
+    <string name="node_teachers">teachers</string>
+    <string name="node_times">times</string>
+    <string name="node_timelogs">timelogs</string>
+</resources>

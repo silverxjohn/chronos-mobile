@@ -1,6 +1,9 @@
 package com.platacode.chronos.Models;
 
-public class TimeLog {
+import com.platacode.chronos.App;
+import com.platacode.chronos.R;
+
+public class TimeLog extends Model {
     private String time_log_id;
     private String class_id;
     private String student_id;
@@ -18,43 +21,43 @@ public class TimeLog {
     public TimeLog() {
     }
 
-    public String getTimeLogId() {
+    public String getTimeLog_id() {
         return time_log_id;
     }
 
-    public void setTimeLogId(String time_log_id) {
+    public void setTimeLog_id(String time_log_id) {
         this.time_log_id = time_log_id;
     }
 
-    public String getClassId() {
+    public String getClass_id() {
         return class_id;
     }
 
-    public void setClassId(String class_id) {
+    public void setClass_id(String class_id) {
         this.class_id = class_id;
     }
 
-    public String getStudentId() {
+    public String getStudent_id() {
         return student_id;
     }
 
-    public void setStudentId(String student_id) {
+    public void setStudent_id(String student_id) {
         this.student_id = student_id;
     }
 
-    public String getCreatedAt() {
+    public String getCreated_at() {
         return created_at;
     }
 
-    public void setCreatedAt(String created_at) {
+    public void setCreated_at(String created_at) {
         this.created_at = created_at;
     }
 
-    public String getUpdatedAt() {
+    public String getUpdated_at() {
         return updated_at;
     }
 
-    public void setUpdatedAt(String updated_at) {
+    public void setUpdated_at(String updated_at) {
         this.updated_at = updated_at;
     }
 
@@ -67,5 +70,15 @@ public class TimeLog {
                 ", created_at='" + created_at + '\'' +
                 ", updated_at='" + updated_at + '\'' +
                 '}';
+    }
+
+    @Override
+    String getDbNode() {
+        return App.getContext().getString(R.string.node_timelogs);
+    }
+
+    @Override
+    String getIdentifier() {
+        return getTimeLog_id();
     }
 }

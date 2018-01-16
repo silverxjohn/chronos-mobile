@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.platacode.chronos.Adapters.SectionsPagerAdapter;
+import com.platacode.chronos.Models.Student;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,6 +1,9 @@
 package com.platacode.chronos.Models;
 
-public class Day {
+import com.platacode.chronos.App;
+import com.platacode.chronos.R;
+
+public class Day extends Model {
     public final static String SUNDAY = "0";
     public final static String MONDAY = "1";
     public final static String TUESDAY = "2";
@@ -20,11 +23,11 @@ public class Day {
     public Day() {
     }
 
-    public String getDayId() {
+    public String getDay_id() {
         return day_id;
     }
 
-    public void setDayId(String day_id) {
+    public void setDay_id(String day_id) {
         this.day_id = day_id;
     }
 
@@ -42,5 +45,15 @@ public class Day {
                 "day_id='" + day_id + '\'' +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    String getDbNode() {
+        return App.getContext().getString(R.string.node_days);
+    }
+
+    @Override
+    String getIdentifier() {
+        return getDay_id();
     }
 }
