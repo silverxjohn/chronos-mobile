@@ -1,6 +1,8 @@
 package com.platacode.chronos.Models;
 
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public abstract class Model {
 
@@ -13,5 +15,11 @@ public abstract class Model {
                 .child(getDbNode())
                 .child(getIdentifier())
                 .setValue(this);
+    }
+
+    public void addValueEventListener(ValueEventListener listener) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+
+        reference.child(getDbNode()).addValueEventListener(listener);
     }
 }

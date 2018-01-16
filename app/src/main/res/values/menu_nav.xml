@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="nav_home">Home</string>
+    <string name="nav_students">Students</string>
+    <string name="nav_teachers">Teachers</string>
+    <string name="nav_parents">Parents</string>
+    <string name="nav_subjects">Subjects</string>
+    <string name="nav_rooms">Rooms</string>
+    <string name="nav_colleges">Colleges</string>
+    <string name="nav_classes">Classes</string>
+</resources>
