@@ -36,8 +36,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (Role.getRoleInstance().getAuthUserRole() == UserRole.teacher) {
             setContentView(R.layout.activity_main);
-
-            setUserDetailsInNavigationDrawer();
         } else if (Role.getRoleInstance().getAuthUserRole() == UserRole.student) {
             setContentView(R.layout.student_activity_main);
         }
@@ -62,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.add(R.id.content_frame, fragment, "general_fragment");
             transaction.commit();
+
+            setUserDetailsInNavigationDrawer();
         } else if (Role.getRoleInstance().getAuthUserRole() == UserRole.student) {
             SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager(), this);
             ViewPager pager = (ViewPager) findViewById(R.id.pager);

@@ -1,23 +1,22 @@
 package com.platacode.chronos.Adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.TwoLineListItem;
+import android.widget.Toast;
 
+import com.platacode.chronos.App;
 import com.platacode.chronos.Models.Student;
 import com.platacode.chronos.R;
 
 import java.util.ArrayList;
-import java.util.zip.Inflater;
-
-/**
- * Created by John on 16/01/2018.
- */
 
 public class StudentAdapter extends BaseAdapter {
     private Context context;
@@ -52,12 +51,50 @@ public class StudentAdapter extends BaseAdapter {
             holder = (RecyclerView.ViewHolder) convertView.getTag();
         }
 
-        Student student = students.get(position);
+        final View v = convertView;
+
+        final Student student = students.get(position);
         TextView text1 = (TextView) convertView.findViewById(R.id.text1);
         text1.setText(student.getFirst_name() + " " + student.getLast_name());
 
         TextView text2 = (TextView) convertView.findViewById(R.id.text2);
         text2.setText(student.getId_number());
+
+        RelativeLayout edit = (RelativeLayout) convertView.findViewById(R.id.edit);
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        RelativeLayout delete = (RelativeLayout) convertView.findViewById(R.id.delete);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View vi) {
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                student.delete();
+                                Toast.makeText(v.getContext(), App.getContext().getString(R.string.student_deleted), Toast.LENGTH_SHORT).show();
+                                break;
+                            case DialogInterface.BUTTON_NEGATIVE:
+                            default:
+
+                                break;
+                        }
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setMessage(App.getContext().getString(R.string.student_delete_confirm))
+                        .setPositiveButton(App.getContext().getString(R.string.yes), dialogClickListener)
+                        .setNegativeButton(App.getContext().getString(R.string.cancel), dialogClickListener)
+                        .show();
+            }
+        });
 
         return convertView;
     }

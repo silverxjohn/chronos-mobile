@@ -1,21 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical"
-              android:paddingLeft="15dp"
-              android:paddingBottom="15dp"
-              android:paddingTop="15dp">
+              android:layout_height="match_parent">
 
-    <TextView android:id="@+id/text1"
-              android:textSize="20sp"
-              android:textStyle="bold"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:id="@+id/bottom_wrapper"
+        android:layout_width="120dp"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-    <TextView android:id="@+id/text2"
-              android:textSize="16sp"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"/>
+        <RelativeLayout
+            android:id="@+id/edit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#0088ff">
 
-</LinearLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_mode_edit_white_24dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/delete"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#e90c0f">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_delete_white_24dp" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp">
+
+        <TextView android:id="@+id/text1"
+                  android:textSize="20sp"
+                  android:textStyle="bold"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"/>
+
+        <TextView android:id="@+id/text2"
+                  android:textSize="16sp"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</com.daimajia.swipe.SwipeLayout>

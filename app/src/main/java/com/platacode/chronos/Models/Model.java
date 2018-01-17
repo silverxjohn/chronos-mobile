@@ -17,6 +17,17 @@ public abstract class Model {
                 .setValue(this);
     }
 
+    public void delete() {
+        delete(getIdentifier());
+    }
+
+    public void delete(String id) {
+        FirebaseDatabase.getInstance().getReference()
+                .child(getDbNode())
+                .child(id)
+                .removeValue();
+    }
+
     public void addValueEventListener(ValueEventListener listener) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
