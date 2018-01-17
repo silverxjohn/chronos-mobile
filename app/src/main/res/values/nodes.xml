@@ -10,4 +10,5 @@
     <string name="node_teachers">teachers</string>
     <string name="node_times">times</string>
     <string name="node_timelogs">timelogs</string>
+    <string name="node_roles">roles</string>
 </resources>

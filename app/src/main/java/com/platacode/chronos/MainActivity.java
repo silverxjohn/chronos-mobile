@@ -17,34 +17,31 @@ import android.view.MenuItem;
 
 import com.google.firebase.database.FirebaseDatabase;
 import com.platacode.chronos.Adapters.SectionsPagerAdapter;
+import com.platacode.chronos.Models.Role;
 import com.platacode.chronos.Models.Student;
+import com.platacode.chronos.Models.UserRole;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static final String EXTRA_ACCESS_LEVEL = "extra_access_level";
-
-    private int accessLevel;
+    private UserRole role;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        accessLevel = getIntent().getExtras().getInt(EXTRA_ACCESS_LEVEL, 0);
-
-        if (isTeacher())
+        if (Role.getRoleInstance().getAuthUserRole() == UserRole.teacher)
             setContentView(R.layout.activity_main);
-        else if (isStudent())
+        else if (Role.getRoleInstance().getAuthUserRole() == UserRole.student)
             setContentView(R.layout.student_activity_main);
 
         initializeComponents();
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
     }
 
     private void initializeComponents() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        if (isTeacher()) {
+        if (Role.getRoleInstance().getAuthUserRole() == UserRole.teacher) {
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.nav_open_drawer, R.string.nav_close_drawer);
             drawer.addDrawerListener(toggle);
@@ -57,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.add(R.id.content_frame, fragment, "general_fragment");
             transaction.commit();
-        } else if (isStudent()) {
+        } else if (Role.getRoleInstance().getAuthUserRole() == UserRole.student) {
             SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager(), this);
             ViewPager pager = (ViewPager) findViewById(R.id.pager);
             pager.setAdapter(adapter);
@@ -65,14 +62,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
             tabs.setupWithViewPager(pager);
         }
-    }
-
-    private boolean isStudent() {
-        return accessLevel == 1;
-    }
-
-    private boolean isTeacher() {
-        return accessLevel == 2;
     }
 
     @Override
@@ -132,6 +121,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onBackPressed() {
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawerLayout == null)
+            return;
+
         if (drawerLayout.isDrawerOpen(GravityCompat.START))
             drawerLayout.closeDrawer(GravityCompat.START);
         else
