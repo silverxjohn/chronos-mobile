@@ -14,25 +14,33 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.platacode.chronos.Adapters.SectionsPagerAdapter;
 import com.platacode.chronos.Models.Role;
 import com.platacode.chronos.Models.Student;
+import com.platacode.chronos.Models.Teacher;
 import com.platacode.chronos.Models.UserRole;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-    private UserRole role;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (Role.getRoleInstance().getAuthUserRole() == UserRole.teacher)
+        if (Role.getRoleInstance().getAuthUserRole() == UserRole.teacher) {
             setContentView(R.layout.activity_main);
-        else if (Role.getRoleInstance().getAuthUserRole() == UserRole.student)
+
+            setUserDetailsInNavigationDrawer();
+        } else if (Role.getRoleInstance().getAuthUserRole() == UserRole.student) {
             setContentView(R.layout.student_activity_main);
+        }
 
         initializeComponents();
     }
@@ -62,6 +70,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
             tabs.setupWithViewPager(pager);
         }
+    }
+
+    private void setUserDetailsInNavigationDrawer() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+
+        ref.child(App.getContext().getString(R.string.node_teachers))
+                .orderByKey()
+                .equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            Teacher teacher = snapshot.getValue(Teacher.class);
+
+                            TextView authName = (TextView) findViewById(R.id.authName);
+                            authName.setText(teacher.getFirst_name() + " " + teacher.getLast_name());
+
+                            TextView authNumber = (TextView) findViewById(R.id.authNumber);
+                            authNumber.setText(teacher.getEmail());
+
+                            break;
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
     }
 
     @Override
@@ -118,22 +155,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        if (drawerLayout == null) {
-//            super.onBackPressed();
-//            return;
-//        }
-//
-//        if (drawerLayout.isDrawerOpen(GravityCompat.START))
-//            drawerLayout.closeDrawer(GravityCompat.START);
-//        else {
-//            if (getSupportFragmentManager().getBackStackEntryCount() > 0){
-//                getSupportFragmentManager().popBackStack();
-//            } else {
-//                super.onBackPressed();
-//            }
-//        }
-//    }
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawerLayout == null) {
+            super.onBackPressed();
+            return;
+        }
+
+        if (drawerLayout.isDrawerOpen(GravityCompat.START))
+            drawerLayout.closeDrawer(GravityCompat.START);
+        else
+            super.onBackPressed();
+    }
 }
