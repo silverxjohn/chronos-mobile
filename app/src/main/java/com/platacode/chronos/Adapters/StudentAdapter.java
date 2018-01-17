@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.platacode.chronos.App;
+import com.platacode.chronos.Models.Role;
 import com.platacode.chronos.Models.Student;
 import com.platacode.chronos.R;
 
@@ -78,6 +79,7 @@ public class StudentAdapter extends BaseAdapter {
                         switch (which) {
                             case DialogInterface.BUTTON_POSITIVE:
                                 student.delete();
+                                Role.getRoleInstance().deleteRole(student.getStudent_id());
                                 Toast.makeText(v.getContext(), App.getContext().getString(R.string.student_deleted), Toast.LENGTH_SHORT).show();
                                 break;
                             case DialogInterface.BUTTON_NEGATIVE:

@@ -34,6 +34,32 @@ public class Role extends Model {
         }
     }
 
+    public void createRole(Student student, UserRole role) {
+        int roleId = 0;
+        switch (role) {
+            case student:
+                roleId = 1;
+                break;
+            case teacher:
+                roleId = 2;
+                break;
+            case admin:
+                roleId = 3;
+                break;
+        }
+        FirebaseDatabase.getInstance().getReference()
+                .child(getDbNode())
+                .child(student.getStudent_id())
+                .setValue(roleId);
+    }
+
+    public void deleteRole(String id) {
+        FirebaseDatabase.getInstance().getReference()
+                .child(getDbNode())
+                .child(id)
+                .removeValue();
+    }
+
     public UserRole getAuthUserRole() {
         return role;
     }

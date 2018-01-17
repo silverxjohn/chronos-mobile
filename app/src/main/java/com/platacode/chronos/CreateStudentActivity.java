@@ -17,7 +17,9 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.platacode.chronos.Models.Role;
 import com.platacode.chronos.Models.Student;
+import com.platacode.chronos.Models.UserRole;
 
 public class CreateStudentActivity extends AppCompatActivity {
 
@@ -88,6 +90,8 @@ public class CreateStudentActivity extends AppCompatActivity {
                 );
 
                 student.create();
+
+                Role.getRoleInstance().createRole(student, UserRole.student);
 
                 auth.signOut();
 
