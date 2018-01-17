@@ -5,6 +5,8 @@
 
     <string name="user_name">John Doe</string>
 
+    <string name="create_student_activity_title">Create Students</string>
+
     <string name="id_number">ID Number</string>
     <string name="id_hint">17-004-001</string>
     <string name="password">Password</string>
@@ -13,6 +15,19 @@
 
     <string name="nav_open_drawer">Open navigation drawer</string>
     <string name="nav_close_drawer">Close navigation drawer</string>
+
+    <string name="student_id">ID Number:</string>
+    <string name="student_first_name">First Name:</string>
+    <string name="student_first_name_hint">Juan</string>
+    <string name="student_last_name">Last Name:</string>
+    <string name="student_last_name_hint">Dela Cruz</string>
+    <string name="student_middle_name">Middle Name:</string>
+    <string name="student_middle_name_hint">Santos</string>
+    <string name="student_email">Email:</string>
+    <string name="student_email_hint">juan.delacruz@email.com</string>
+    <string name="student_phone">Phone:</string>
+    <string name="student_phone_hint">09291234567</string>
+    <string name="student_password">Password:</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

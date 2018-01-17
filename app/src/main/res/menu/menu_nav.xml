@@ -3,32 +3,32 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@android:drawable/sym_action_email"
+            android:icon="@drawable/ic_apps_black_24dp"
             android:title="@string/nav_home" />
 
         <item
             android:id="@+id/nav_students"
-            android:icon="@android:drawable/ic_menu_edit"
+            android:icon="@drawable/ic_school_black_24dp"
             android:title="@string/nav_students" />
 
         <item
             android:id="@+id/nav_teachers"
-            android:icon="@android:drawable/ic_menu_edit"
+            android:icon="@drawable/ic_people_black_24dp"
             android:title="@string/nav_teachers" />
 
         <item
             android:id="@+id/nav_classes"
-            android:icon="@android:drawable/ic_menu_send"
+            android:icon="@drawable/ic_business_center_black_24dp"
             android:title="@string/nav_classes" />
 
         <item
             android:id="@+id/nav_subjects"
-            android:icon="@android:drawable/ic_menu_edit"
+            android:icon="@drawable/ic_event_note_black_24dp"
             android:title="@string/nav_subjects" />
 
         <item
             android:id="@+id/nav_rooms"
-            android:icon="@android:drawable/ic_menu_edit"
+            android:icon="@drawable/ic_business_black_24dp"
             android:title="@string/nav_rooms" />
     </group>
 </menu>

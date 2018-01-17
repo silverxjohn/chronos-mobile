@@ -118,17 +118,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawerLayout == null) {
-            super.onBackPressed();
-            return;
-        }
-
-        if (drawerLayout.isDrawerOpen(GravityCompat.START))
-            drawerLayout.closeDrawer(GravityCompat.START);
-        else
-            super.onBackPressed();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        if (drawerLayout == null) {
+//            super.onBackPressed();
+//            return;
+//        }
+//
+//        if (drawerLayout.isDrawerOpen(GravityCompat.START))
+//            drawerLayout.closeDrawer(GravityCompat.START);
+//        else {
+//            if (getSupportFragmentManager().getBackStackEntryCount() > 0){
+//                getSupportFragmentManager().popBackStack();
+//            } else {
+//                super.onBackPressed();
+//            }
+//        }
+//    }
 }

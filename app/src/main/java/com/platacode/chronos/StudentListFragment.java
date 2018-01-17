@@ -1,10 +1,13 @@
 package com.platacode.chronos;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,12 +46,12 @@ public class StudentListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final ArrayList<Student> students = new ArrayList<Student>();
+        final View v = getView();
 
         new Student().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                students.clear();
+                ArrayList<Student> students = new ArrayList<Student>();
 
                 for (DataSnapshot studentsSnapshot : dataSnapshot.getChildren()) {
                         Student student = studentsSnapshot.getValue(Student.class);
@@ -56,7 +59,7 @@ public class StudentListFragment extends Fragment {
                         students.add(student);
                 }
 
-                ListView listView = (ListView) getView().findViewById(R.id.listview);
+                ListView listView = (ListView) v.findViewById(R.id.listview);
                 StudentAdapter adapter = new StudentAdapter(getContext(), students);
                 listView.setAdapter(adapter);
             }
@@ -64,6 +67,16 @@ public class StudentListFragment extends Fragment {
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });
+
+        FloatingActionButton fab = (FloatingActionButton) getView().findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CreateStudentActivity.class);
+
+                startActivity(intent);
             }
         });
     }
