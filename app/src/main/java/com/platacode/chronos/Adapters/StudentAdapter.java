@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,6 +61,14 @@ public class StudentAdapter extends BaseAdapter {
 
         TextView text2 = (TextView) convertView.findViewById(R.id.text2);
         text2.setText(student.getId_number());
+
+        LinearLayout item = (LinearLayout) convertView.findViewById(R.id.item_container);
+        item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         RelativeLayout edit = (RelativeLayout) convertView.findViewById(R.id.edit);
         edit.setOnClickListener(new View.OnClickListener() {
