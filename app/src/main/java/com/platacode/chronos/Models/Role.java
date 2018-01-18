@@ -10,6 +10,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.platacode.chronos.App;
 import com.platacode.chronos.R;
 
+import java.util.Map;
+
 public class Role extends Model {
     private UserRole role;
     private static Role roleInstance;
@@ -71,6 +73,11 @@ public class Role extends Model {
 
     @Override
     String getIdentifier() {
+        return null;
+    }
+
+    @Override
+    Map<String, Object> toMap() {
         return null;
     }
 }

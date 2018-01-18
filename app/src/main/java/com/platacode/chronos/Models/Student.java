@@ -3,6 +3,9 @@ package com.platacode.chronos.Models;
 import com.platacode.chronos.App;
 import com.platacode.chronos.R;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Student extends Model {
     private String student_id;
     private String id_number;
@@ -102,5 +105,19 @@ public class Student extends Model {
     @Override
     String getIdentifier() {
         return getStudent_id();
+    }
+
+    @Override
+    Map<String, Object> toMap() {
+        Map<String, Object> student = new HashMap<>();
+
+        student.put(App.getContext().getString(R.string.student_field_email), getEmail());
+        student.put(App.getContext().getString(R.string.student_field_first_name), getFirst_name());
+        student.put(App.getContext().getString(R.string.student_field_middle_name), getMiddle_name());
+        student.put(App.getContext().getString(R.string.student_field_last_name), getLast_name());
+        student.put(App.getContext().getString(R.string.student_field_id_number), getId_number());
+        student.put(App.getContext().getString(R.string.student_field_phone), getPhone());
+
+        return student;
     }
 }

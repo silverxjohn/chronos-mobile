@@ -12,13 +12,9 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.platacode.chronos.Models.Student;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class EditStudentActivity extends AppCompatActivity {
 
@@ -29,6 +25,7 @@ public class EditStudentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_student);
+
         initializeComponents();
         getUserData();
     }
@@ -100,25 +97,25 @@ public class EditStudentActivity extends AppCompatActivity {
     }
 
     private void editStudent() {
-        final EditText email = (EditText) findViewById(R.id.txtEmail);
-        final EditText firstName = (EditText) findViewById(R.id.txtFirstName);
-        final EditText middleName = (EditText) findViewById(R.id.txtMiddleName);
-        final EditText lastName = (EditText) findViewById(R.id.txtLastName);
-        final EditText phone = (EditText) findViewById(R.id.txtPhone);
-        final EditText idNumber = (EditText) findViewById(R.id.txtIdNumber);
+        EditText email = (EditText) findViewById(R.id.txtEmail);
+        student.setEmail(email.getText().toString());
 
-        Map<String, Object> updates = new HashMap<String, Object>();
-        updates.put("email", email.getText().toString());
-        updates.put("first_name", firstName.getText().toString());
-        updates.put("middle_name", middleName.getText().toString());
-        updates.put("last_name", lastName.getText().toString());
-        updates.put("id_number", idNumber.getText().toString());
-        updates.put("phone", phone.getText().toString());
+        EditText firstName = (EditText) findViewById(R.id.txtFirstName);
+        student.setFirst_name(firstName.getText().toString());
 
-        FirebaseDatabase.getInstance().getReference()
-                .child(getString(R.string.node_students))
-                .child(student.getStudent_id())
-                .updateChildren(updates);
+        EditText middleName = (EditText) findViewById(R.id.txtMiddleName);
+        student.setMiddle_name(middleName.getText().toString());
+
+        EditText lastName = (EditText) findViewById(R.id.txtLastName);
+        student.setLast_name(lastName.getText().toString());
+
+        EditText phone = (EditText) findViewById(R.id.txtPhone);
+        student.setPhone(phone.getText().toString());
+
+        EditText idNumber = (EditText) findViewById(R.id.txtIdNumber);
+        student.setId_number(idNumber.getText().toString());
+
+        student.saveChanges();
 
         Toast.makeText(this, getString(R.string.student_updated), Toast.LENGTH_SHORT).show();
         finish();

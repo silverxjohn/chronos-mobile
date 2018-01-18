@@ -3,6 +3,8 @@ package com.platacode.chronos.Models;
 import com.platacode.chronos.App;
 import com.platacode.chronos.R;
 
+import java.util.Map;
+
 public class Time extends Model {
     public static final String AM_6_7 = "1";
     public static final String AM_7_8 = "2";
@@ -62,5 +64,10 @@ public class Time extends Model {
     @Override
     String getIdentifier() {
         return getTime_id();
+    }
+
+    @Override
+    Map<String, Object> toMap() {
+        return null;
     }
 }

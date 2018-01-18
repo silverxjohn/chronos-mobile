@@ -3,6 +3,8 @@ package com.platacode.chronos.Models;
 import com.platacode.chronos.App;
 import com.platacode.chronos.R;
 
+import java.util.Map;
+
 public class Room extends Model {
     private String room_id;
     private String number;
@@ -58,5 +60,10 @@ public class Room extends Model {
     @Override
     String getIdentifier() {
         return getRoom_id();
+    }
+
+    @Override
+    Map<String, Object> toMap() {
+        return null;
     }
 }

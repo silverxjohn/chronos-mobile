@@ -3,6 +3,8 @@ package com.platacode.chronos.Models;
 import com.platacode.chronos.App;
 import com.platacode.chronos.R;
 
+import java.util.Map;
+
 public class TimeLog extends Model {
     private String time_log_id;
     private String class_id;
@@ -80,5 +82,10 @@ public class TimeLog extends Model {
     @Override
     String getIdentifier() {
         return getTimeLog_id();
+    }
+
+    @Override
+    Map<String, Object> toMap() {
+        return null;
     }
 }

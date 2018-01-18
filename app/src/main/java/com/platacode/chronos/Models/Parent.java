@@ -3,6 +3,8 @@ package com.platacode.chronos.Models;
 import com.platacode.chronos.App;
 import com.platacode.chronos.R;
 
+import java.util.Map;
+
 public class Parent extends Model {
     private String parent_id;
     private String first_name;
@@ -91,5 +93,10 @@ public class Parent extends Model {
     @Override
     String getIdentifier() {
         return getParent_id();
+    }
+
+    @Override
+    Map<String, Object> toMap() {
+        return null;
     }
 }
