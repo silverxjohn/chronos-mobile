@@ -2,6 +2,7 @@ package com.platacode.chronos.Adapters;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.platacode.chronos.App;
+import com.platacode.chronos.EditStudentActivity;
 import com.platacode.chronos.Models.Role;
 import com.platacode.chronos.Models.Student;
 import com.platacode.chronos.R;
@@ -65,8 +67,11 @@ public class StudentAdapter extends BaseAdapter {
         LinearLayout item = (LinearLayout) convertView.findViewById(R.id.item_container);
         item.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View vi) {
+                Intent intent = new Intent(v.getContext(), EditStudentActivity.class);
+                intent.putExtra(EditStudentActivity.EXTRA_STUDENT_ID, student.getStudent_id());
 
+                v.getContext().startActivity(intent);
             }
         });
 
@@ -74,7 +79,10 @@ public class StudentAdapter extends BaseAdapter {
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), EditStudentActivity.class);
+                intent.putExtra(EditStudentActivity.EXTRA_STUDENT_ID, student.getStudent_id());
 
+                v.getContext().startActivity(intent);
             }
         });
 

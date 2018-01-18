@@ -6,6 +6,7 @@
     <string name="user_name">John Doe</string>
 
     <string name="create_student_activity_title">Create Students</string>
+    <string name="edit_student_activity_title">Edit Student</string>
 
     <string name="id_number">ID Number</string>
     <string name="id_hint">17-004-001</string>
@@ -29,6 +30,7 @@
     <string name="student_phone_hint">09291234567</string>
     <string name="student_password">Password:</string>
 
+    <string name="student_updated">Student Information Updated!</string>
     <string name="student_deleted">Student Deleted!</string>
     <string name="student_delete_confirm">Are you sure you want to delete this student?</string>
 
