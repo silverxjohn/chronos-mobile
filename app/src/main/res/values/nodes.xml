@@ -1,14 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- CLASS NODE -->
     <string name="node_classes">classes</string>
+    <!-- CLASS FIELDS -->
+    <string name="class_field_class_id">class_id</string>
+    <string name="class_field_teacher_id">teacher_id</string>
+    <string name="class_field_room_id">room_id</string>
+    <string name="class_field_day_id">day_id</string>
+    <string name="class_field_time_id">time_id</string>
+    <string name="class_field_subject_id">subject_id</string>
+
+
+    <!-- COLLEGE NODE -->
     <string name="node_colleges">colleges</string>
+    <!-- COLLEGE FIELDS -->
+    <string name="college_field_college_id">college_id</string>
+    <string name="college_field_name">name</string>
+
+
+    <!-- DAY NODE -->
     <string name="node_days">days</string>
+    <!-- DAY FIELDS -->
+    <string name="day_field_day_id">day_id</string>
+    <string name="day_field_name">name</string>
+
+
+    <!-- PARENT NODE -->
     <string name="node_parents">parents</string>
+    <!-- PARENT FIELDS -->
+    <string name="parent_field_parent_id">parent_id</string>
+    <string name="parent_field_first_name">first_name</string>
+    <string name="parent_field_last_name">last_name</string>
+    <string name="parent_field_phone">phone</string>
+    <string name="parent_field_email">email</string>
+    <string name="parent_field_student_id">student_id</string>
+
+
+    <!-- ROOM NODE -->
     <string name="node_rooms">rooms</string>
+    <!-- ROOM FIELDS -->
+    <string name="room_field_room_id">room_id</string>
+    <string name="room_field_number">number</string>
+    <string name="room_field_college_id">college_id</string>
+
 
     <!-- STUDENT NODE -->
     <string name="node_students">students</string>
-    <!-- STUDENT FILEDS -->
+    <!-- STUDENT FIELDS -->
     <string name="student_field_email">email</string>
     <string name="student_field_first_name">first_name</string>
     <string name="student_field_middle_name">middle_name</string>
@@ -17,10 +55,44 @@
     <string name="student_field_phone">phone</string>
 
 
-
+    <!-- SUBJECT NODE -->
     <string name="node_subjects">subjects</string>
+    <!-- SUBJECT FIELDS -->
+    <string name="subject_field_subject_id">subject_id</string>
+    <string name="subject_field_name">name</string>
+    <string name="subject_field_description">description</string>
+    <string name="subject_field_units">units</string>
+
+    <!-- TEACHER NODE -->
     <string name="node_teachers">teachers</string>
+    <!-- TEACHER FIELDS -->
+    <string name="teacher_field_teacher_id">teacher_id</string>
+    <string name="teacher_field_first_name">first_name</string>
+    <string name="teacher_field_last_name">last_name</string>
+    <string name="teacher_field_phone">phone</string>
+    <string name="teacher_field_email">email</string>
+
+
+    <!-- TIME NODE -->
     <string name="node_times">times</string>
+    <!-- TIME FIELDS -->
+    <string name="time_field_time_id">time_id</string>
+    <string name="time_field_name">name</string>
+
+
+    <!-- TIMELOG NODE -->
     <string name="node_timelogs">timelogs</string>
+    <!-- TIMELOG FIELDS -->
+    <string name="timelog_field_time_log_id">time_log_id</string>
+    <string name="timelog_field_class_id">class_id</string>
+    <string name="timelog_field_student_id">student_id</string>
+    <string name="timelog_field_latitude">latitude</string>
+    <string name="timelog_field_longitude">longitude</string>
+    <string name="timelog_field_created_at">created_at</string>
+
+
+    <!-- ROLE NODE -->
     <string name="node_roles">roles</string>
+    <!-- ROLE FIELDS -->
+
 </resources>

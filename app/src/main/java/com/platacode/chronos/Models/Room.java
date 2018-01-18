@@ -3,6 +3,7 @@ package com.platacode.chronos.Models;
 import com.platacode.chronos.App;
 import com.platacode.chronos.R;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Room extends Model {
@@ -64,6 +65,12 @@ public class Room extends Model {
 
     @Override
     Map<String, Object> toMap() {
-        return null;
+        Map<String, Object> room = new HashMap<>();
+
+        room.put(App.getContext().getString(R.string.room_field_room_id), getRoom_id());
+        room.put(App.getContext().getString(R.string.room_field_number), getNumber());
+        room.put(App.getContext().getString(R.string.room_field_college_id), getCollege_id());
+
+        return room;
     }
 }
