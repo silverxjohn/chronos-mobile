@@ -4,13 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,12 +15,11 @@ import com.platacode.chronos.R;
 
 import java.util.ArrayList;
 
-public class StudentAdapter extends BaseAdapter {
-    private Context context;
+public class StudentAdapter extends ListSwipableAdapter {
     private ArrayList<Student> students;
 
     public StudentAdapter(Context context, ArrayList<Student> students) {
-        this.context = context;
+        super(context);
         this.students = students;
     }
 
@@ -42,79 +34,58 @@ public class StudentAdapter extends BaseAdapter {
     }
 
     @Override
-    public long getItemId(int position) {
-        return 0;
+    void setDisplayItem(int position, TextView heading, TextView subheading) {
+        Student student = students.get(position);
+
+        heading.setText(student.getFirst_name() + " " + student.getLast_name());
+        subheading.setText(student.getId_number());
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        RecyclerView.ViewHolder holder;
-        if (convertView == null) {
-            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_2, null);
-        } else {
-            holder = (RecyclerView.ViewHolder) convertView.getTag();
-        }
+    void onItemClicked(int position) {
+        Student student = students.get(position);
 
-        final View v = convertView;
+        Intent intent = new Intent(getContext(), EditStudentActivity.class);
+        intent.putExtra(EditStudentActivity.EXTRA_STUDENT_ID, student.getStudent_id());
 
+        getContext().startActivity(intent);
+    }
+
+    @Override
+    void onEditActionButtonClicked(int position) {
+        Student student = students.get(position);
+
+        Intent intent = new Intent(getContext(), EditStudentActivity.class);
+        intent.putExtra(EditStudentActivity.EXTRA_STUDENT_ID, student.getStudent_id());
+
+        getContext().startActivity(intent);
+    }
+
+    @Override
+    void onDeleteActionButtonClicked(int position) {
         final Student student = students.get(position);
-        TextView text1 = (TextView) convertView.findViewById(R.id.text1);
-        text1.setText(student.getFirst_name() + " " + student.getLast_name());
 
-        TextView text2 = (TextView) convertView.findViewById(R.id.text2);
-        text2.setText(student.getId_number());
-
-        LinearLayout item = (LinearLayout) convertView.findViewById(R.id.item_container);
-        item.setOnClickListener(new View.OnClickListener() {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(View vi) {
-                Intent intent = new Intent(v.getContext(), EditStudentActivity.class);
-                intent.putExtra(EditStudentActivity.EXTRA_STUDENT_ID, student.getStudent_id());
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        student.delete();
+                        Role.getRoleInstance().deleteRole(student.getStudent_id());
+                        Toast.makeText(getContext(), App.getContext().getString(R.string.student_deleted), Toast.LENGTH_SHORT).show();
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                    default:
 
-                v.getContext().startActivity(intent);
+                        break;
+                }
             }
-        });
+        };
 
-        RelativeLayout edit = (RelativeLayout) convertView.findViewById(R.id.edit);
-        edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), EditStudentActivity.class);
-                intent.putExtra(EditStudentActivity.EXTRA_STUDENT_ID, student.getStudent_id());
-
-                v.getContext().startActivity(intent);
-            }
-        });
-
-        RelativeLayout delete = (RelativeLayout) convertView.findViewById(R.id.delete);
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View vi) {
-                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (which) {
-                            case DialogInterface.BUTTON_POSITIVE:
-                                student.delete();
-                                Role.getRoleInstance().deleteRole(student.getStudent_id());
-                                Toast.makeText(v.getContext(), App.getContext().getString(R.string.student_deleted), Toast.LENGTH_SHORT).show();
-                                break;
-                            case DialogInterface.BUTTON_NEGATIVE:
-                            default:
-
-                                break;
-                        }
-                    }
-                };
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                builder.setMessage(App.getContext().getString(R.string.student_delete_confirm))
-                        .setPositiveButton(App.getContext().getString(R.string.yes), dialogClickListener)
-                        .setNegativeButton(App.getContext().getString(R.string.cancel), dialogClickListener)
-                        .show();
-            }
-        });
-
-        return convertView;
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage(App.getContext().getString(R.string.student_delete_confirm))
+                .setPositiveButton(App.getContext().getString(R.string.yes), dialogClickListener)
+                .setNegativeButton(App.getContext().getString(R.string.cancel), dialogClickListener)
+                .show();
     }
 }
