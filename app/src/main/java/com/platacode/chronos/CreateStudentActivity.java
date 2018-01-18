@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -94,6 +95,8 @@ public class CreateStudentActivity extends AppCompatActivity {
                 Role.getRoleInstance().createRole(student, UserRole.student);
 
                 auth.signOut();
+
+                Toast.makeText(CreateStudentActivity.this, R.string.student_created, Toast.LENGTH_SHORT).show();
 
                 finish();
             }
