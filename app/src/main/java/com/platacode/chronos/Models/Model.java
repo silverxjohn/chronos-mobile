@@ -54,6 +54,8 @@ public abstract class Model<T> {
         addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                items.clear();
+
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     items.add(parseSnapshot(snapshot));
                 }

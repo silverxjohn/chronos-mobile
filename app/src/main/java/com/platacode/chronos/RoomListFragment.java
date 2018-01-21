@@ -50,7 +50,7 @@ public class RoomListFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), CreateTeacherActivity.class);
+                Intent intent = new Intent(getActivity(), CreateRoomActivity.class);
 
                 startActivity(intent);
             }
@@ -73,7 +73,7 @@ public class RoomListFragment extends Fragment {
                             colleges.put(Integer.valueOf(college.getCollege_id()), college);
                         }
 
-                        RoomAdapter adapter = new RoomAdapter(getView().getContext(), rooms, colleges);
+                        RoomAdapter adapter = new RoomAdapter(v.getContext(), rooms, colleges);
 
                         ListView listView = (ListView) v.findViewById(R.id.listview);
                         listView.setAdapter(adapter);

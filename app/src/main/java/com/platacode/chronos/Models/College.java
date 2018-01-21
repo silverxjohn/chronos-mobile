@@ -53,11 +53,7 @@ public class College extends Model<College> {
 
     @Override
     public String toString() {
-        return "College{" +
-                "college_id='" + college_id + '\'' +
-                ", name='" + name + '\'' +
-                ", initials='" + initials + '\'' +
-                '}';
+        return name;
     }
 
     @Override

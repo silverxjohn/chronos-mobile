@@ -1,11 +1,13 @@
 package com.platacode.chronos.Models;
 
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.FirebaseDatabase;
 import com.platacode.chronos.App;
 import com.platacode.chronos.R;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class Room extends Model<Room> {
     private String room_id;
@@ -14,6 +16,12 @@ public class Room extends Model<Room> {
 
     public Room(String room_id, String number, String college_id) {
         this.room_id = room_id;
+        this.number = number;
+        this.college_id = college_id;
+    }
+
+    public Room(String number, String college_id) {
+        this.room_id = UUID.randomUUID().toString().replace("-", "").substring(0, 27);
         this.number = number;
         this.college_id = college_id;
     }
