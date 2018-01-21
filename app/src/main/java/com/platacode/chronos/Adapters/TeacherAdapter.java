@@ -14,12 +14,13 @@ import com.platacode.chronos.Models.Teacher;
 import com.platacode.chronos.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TeacherAdapter extends ListSwipableAdapter {
 
-    private ArrayList<Teacher> teachers;
+    private List<Teacher> teachers;
 
-    public TeacherAdapter(Context context, ArrayList<Teacher> teachers) {
+    public TeacherAdapter(Context context, List<Teacher> teachers) {
         super(context);
         this.teachers = teachers;
     }

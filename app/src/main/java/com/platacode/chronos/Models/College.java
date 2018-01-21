@@ -85,29 +85,4 @@ public class College extends Model<College> {
 
         return college;
     }
-
-    @Override
-    public void get(final Collector collector) {
-        FirebaseDatabase.getInstance().getReference()
-                .child(getDbNode())
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        List<College> colleges = new ArrayList<>();
-
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            for (DataSnapshot collegeSnapshot : snapshot.getChildren()) {
-                                colleges.add(parseSnapshot(collegeSnapshot));
-                            }
-                        }
-
-                        collector.collect(colleges);
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-    }
 }

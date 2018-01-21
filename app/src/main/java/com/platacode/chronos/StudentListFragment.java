@@ -64,8 +64,9 @@ public class StudentListFragment extends Fragment {
         new Student().get(new Collector<Student>() {
             @Override
             public void collect(List<Student> students) {
-                ListView listView = (ListView) v.findViewById(R.id.listview);
                 StudentAdapter adapter = new StudentAdapter(v.getContext(), students);
+
+                ListView listView = (ListView) v.findViewById(R.id.listview);
                 listView.setAdapter(adapter);
             }
         });
