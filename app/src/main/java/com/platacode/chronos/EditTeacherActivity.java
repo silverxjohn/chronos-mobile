@@ -14,17 +14,17 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.platacode.chronos.Models.Student;
+import com.platacode.chronos.Models.Teacher;
 
-public class EditStudentActivity extends AppCompatActivity {
+public class EditTeacherActivity extends AppCompatActivity {
 
-    public static final String EXTRA_STUDENT_ID = "student_id";
-    private Student student;
+    public static final String EXTRA_TEACHER_ID = "teacher_id";
+    private Teacher teacher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_student);
+        setContentView(R.layout.activity_edit_teacher);
 
         initializeComponents();
         getUserData();
@@ -39,16 +39,16 @@ public class EditStudentActivity extends AppCompatActivity {
 
     private void getUserData() {
         Intent intent = getIntent();
-        String studentId = intent.getStringExtra(EXTRA_STUDENT_ID);
+        final String teacherId = intent.getStringExtra(EXTRA_TEACHER_ID);
         FirebaseDatabase.getInstance().getReference()
-                .child(getString(R.string.node_students))
-                .child(studentId)
+                .child(getString(R.string.node_teachers))
+                .child(teacherId)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                            student = dataSnapshot.getValue(Student.class);
+                        teacher = dataSnapshot.getValue(Teacher.class);
 
-                            renderStudentData();
+                        renderTeacherData();
                     }
 
                     @Override
@@ -58,29 +58,23 @@ public class EditStudentActivity extends AppCompatActivity {
                 });
     }
 
-    private void renderStudentData() {
+    private void renderTeacherData() {
         final EditText email = (EditText) findViewById(R.id.txtEmail);
-        email.setText(student.getEmail());
+        email.setText(teacher.getEmail());
 
         final EditText firstName = (EditText) findViewById(R.id.txtFirstName);
-        firstName.setText(student.getFirst_name());
-
-        final EditText middleName = (EditText) findViewById(R.id.txtMiddleName);
-        middleName.setText(student.getMiddle_name());
+        firstName.setText(teacher.getFirst_name());
 
         final EditText lastName = (EditText) findViewById(R.id.txtLastName);
-        lastName.setText(student.getLast_name());
+        lastName.setText(teacher.getLast_name());
 
         final EditText phone = (EditText) findViewById(R.id.txtPhone);
-        phone.setText(student.getPhone());
-
-        final EditText idNumber = (EditText) findViewById(R.id.txtIdNumber);
-        idNumber.setText(student.getId_number());
+        phone.setText(teacher.getPhone());
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.edit_student_menu, menu);
+        getMenuInflater().inflate(R.menu.create_menu, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -89,45 +83,29 @@ public class EditStudentActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.create_menu:
-                editStudent();
-                return true;
-            case R.id.assign_parent_menu:
-                assignParent();
+                editTeacher();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    private void editStudent() {
+    private void editTeacher() {
         EditText email = (EditText) findViewById(R.id.txtEmail);
-        student.setEmail(email.getText().toString());
+        teacher.setEmail(email.getText().toString());
 
         EditText firstName = (EditText) findViewById(R.id.txtFirstName);
-        student.setFirst_name(firstName.getText().toString());
-
-        EditText middleName = (EditText) findViewById(R.id.txtMiddleName);
-        student.setMiddle_name(middleName.getText().toString());
+        teacher.setFirst_name(firstName.getText().toString());
 
         EditText lastName = (EditText) findViewById(R.id.txtLastName);
-        student.setLast_name(lastName.getText().toString());
+        teacher.setLast_name(lastName.getText().toString());
 
         EditText phone = (EditText) findViewById(R.id.txtPhone);
-        student.setPhone(phone.getText().toString());
+        teacher.setPhone(phone.getText().toString());
 
-        EditText idNumber = (EditText) findViewById(R.id.txtIdNumber);
-        student.setId_number(idNumber.getText().toString());
+        teacher.saveChanges();
 
-        student.saveChanges();
-
-        Toast.makeText(this, getString(R.string.student_updated), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.teacher_updated), Toast.LENGTH_SHORT).show();
         finish();
-    }
-
-    private void assignParent() {
-        Intent intent = new Intent(EditStudentActivity.this, EditParentActivity.class);
-        intent.putExtra(EditParentActivity.EXTRA_STUDENT_ID, student.getStudent_id());
-
-        startActivity(intent);
     }
 }

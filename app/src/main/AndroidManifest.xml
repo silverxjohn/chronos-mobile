@@ -24,8 +24,23 @@
             android:label="@string/create_student_activity_title"
             android:parentActivityName=".MainActivity">
         </activity>
-        <activity android:name=".EditStudentActivity"
+        <activity
+            android:name=".EditStudentActivity"
             android:label="@string/edit_student_activity_title"
+            android:parentActivityName=".MainActivity">
+        </activity>
+        <activity
+            android:name=".CreateTeacherActivity"
+            android:label="@string/create_teacher_activity_title"
+            android:parentActivityName=".MainActivity">
+        </activity>
+        <activity
+            android:name=".EditTeacherActivity"
+            android:label="@string/edit_teacher_activity_title"
+            android:parentActivityName=".MainActivity">
+        </activity>
+        <activity android:name=".EditParentActivity"
+                  android:label="@string/edit_parent_activity_title"
             android:parentActivityName=".MainActivity">
         </activity>
     </application>

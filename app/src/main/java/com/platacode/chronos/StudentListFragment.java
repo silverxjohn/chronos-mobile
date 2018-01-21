@@ -7,11 +7,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -21,7 +19,6 @@ import com.platacode.chronos.Adapters.StudentAdapter;
 import com.platacode.chronos.Models.Student;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -46,6 +43,20 @@ public class StudentListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        displayStudentList();
+
+        FloatingActionButton fab = (FloatingActionButton) getView().findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CreateStudentActivity.class);
+
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void displayStudentList() {
         final View v = getView();
 
         new Student().addValueEventListener(new ValueEventListener() {
@@ -54,9 +65,9 @@ public class StudentListFragment extends Fragment {
                 ArrayList<Student> students = new ArrayList<Student>();
 
                 for (DataSnapshot studentsSnapshot : dataSnapshot.getChildren()) {
-                        Student student = studentsSnapshot.getValue(Student.class);
+                    Student student = studentsSnapshot.getValue(Student.class);
 
-                        students.add(student);
+                    students.add(student);
                 }
 
                 ListView listView = (ListView) v.findViewById(R.id.listview);
@@ -67,16 +78,6 @@ public class StudentListFragment extends Fragment {
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
-
-        FloatingActionButton fab = (FloatingActionButton) getView().findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), CreateStudentActivity.class);
-
-                startActivity(intent);
             }
         });
     }

@@ -10,4 +10,5 @@
     <string name="nav_classes">Classes</string>
 
     <string name="nav_create">Create</string>
+    <string name="nav_assign_parent">Assign Parent</string>
 </resources>

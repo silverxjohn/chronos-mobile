@@ -1,5 +1,6 @@
 package com.platacode.chronos.Models;
 
+import com.google.firebase.database.FirebaseDatabase;
 import com.platacode.chronos.App;
 import com.platacode.chronos.R;
 
@@ -108,5 +109,23 @@ public class Parent extends Model {
         parent.put(App.getContext().getString(R.string.parent_field_student_id), getStudent_id());
 
         return parent;
+    }
+
+    @Override
+    public void create() {
+        FirebaseDatabase.getInstance().getReference()
+                .child(getDbNode())
+                .child(getStudent_id())
+                .child(getIdentifier())
+                .setValue(this);
+    }
+
+    @Override
+    public void saveChanges() {
+        FirebaseDatabase.getInstance().getReference()
+                .child(getDbNode())
+                .child(getStudent_id())
+                .child(getIdentifier())
+                .updateChildren(toMap());
     }
 }
