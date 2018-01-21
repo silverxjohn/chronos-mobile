@@ -1,13 +1,15 @@
 package com.platacode.chronos.Models;
 
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 import com.platacode.chronos.App;
+import com.platacode.chronos.Interfaces.Collector;
 import com.platacode.chronos.R;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Parent extends Model {
+public class Parent extends Model<Parent> {
     private String parent_id;
     private String first_name;
     private String last_name;
@@ -127,5 +129,15 @@ public class Parent extends Model {
                 .child(getStudent_id())
                 .child(getIdentifier())
                 .updateChildren(toMap());
+    }
+
+    @Override
+    public void get(Collector collector) {
+//        super.get(collector);
+    }
+
+    @Override
+    Parent parseSnapshot(DataSnapshot snapshot) {
+        return snapshot.getValue(Parent.class);
     }
 }

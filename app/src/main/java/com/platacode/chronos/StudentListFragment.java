@@ -16,9 +16,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.platacode.chronos.Adapters.StudentAdapter;
+import com.platacode.chronos.Interfaces.Collector;
 import com.platacode.chronos.Models.Student;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -59,25 +61,12 @@ public class StudentListFragment extends Fragment {
     private void displayStudentList() {
         final View v = getView();
 
-        new Student().addValueEventListener(new ValueEventListener() {
+        new Student().get(new Collector<Student>() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                ArrayList<Student> students = new ArrayList<Student>();
-
-                for (DataSnapshot studentsSnapshot : dataSnapshot.getChildren()) {
-                    Student student = studentsSnapshot.getValue(Student.class);
-
-                    students.add(student);
-                }
-
+            public void collect(List<Student> students) {
                 ListView listView = (ListView) v.findViewById(R.id.listview);
-                StudentAdapter adapter = new StudentAdapter(getContext(), students);
+                StudentAdapter adapter = new StudentAdapter(v.getContext(), students);
                 listView.setAdapter(adapter);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
             }
         });
     }

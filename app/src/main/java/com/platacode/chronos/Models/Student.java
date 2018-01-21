@@ -1,16 +1,13 @@
 package com.platacode.chronos.Models;
 
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.platacode.chronos.App;
 import com.platacode.chronos.R;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Student extends Model {
+public class Student extends Model<Student> {
     private String student_id;
     private String id_number;
     private String first_name;
@@ -18,8 +15,6 @@ public class Student extends Model {
     private String last_name;
     private String email;
     private String phone;
-
-    private boolean hasParents;
 
     public Student(String student_id, String id_number, String first_name, String middle_name, String last_name, String email, String phone) {
         this.student_id = student_id;
@@ -114,6 +109,11 @@ public class Student extends Model {
     }
 
     @Override
+    Student parseSnapshot(DataSnapshot snapshot) {
+        return snapshot.getValue(Student.class);
+    }
+
+    @Override
     Map<String, Object> toMap() {
         Map<String, Object> student = new HashMap<>();
 
@@ -125,22 +125,5 @@ public class Student extends Model {
         student.put(App.getContext().getString(R.string.student_field_phone), getPhone());
 
         return student;
-    }
-
-    public void checkIfStudentHasParents() {
-        FirebaseDatabase.getInstance().getReference()
-                .child(getDbNode())
-                .child(getStudent_id())
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        hasParents = dataSnapshot.exists();
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
     }
 }

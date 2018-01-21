@@ -1,12 +1,13 @@
 package com.platacode.chronos.Models;
 
+import com.google.firebase.database.DataSnapshot;
 import com.platacode.chronos.App;
 import com.platacode.chronos.R;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Day extends Model {
+public class Day extends Model<Day> {
     public final static String SUNDAY = "0";
     public final static String MONDAY = "1";
     public final static String TUESDAY = "2";
@@ -58,6 +59,11 @@ public class Day extends Model {
     @Override
     String getIdentifier() {
         return getDay_id();
+    }
+
+    @Override
+    Day parseSnapshot(DataSnapshot snapshot) {
+        return snapshot.getValue(Day.class);
     }
 
     @Override

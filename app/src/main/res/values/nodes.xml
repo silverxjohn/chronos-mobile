@@ -16,6 +16,7 @@
     <!-- COLLEGE FIELDS -->
     <string name="college_field_college_id">college_id</string>
     <string name="college_field_name">name</string>
+    <string name="college_field_initials">initials</string>
 
 
     <!-- DAY NODE -->

@@ -1,12 +1,13 @@
 package com.platacode.chronos.Models;
 
+import com.google.firebase.database.DataSnapshot;
 import com.platacode.chronos.App;
 import com.platacode.chronos.R;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class TimeLog extends Model {
+public class TimeLog extends Model<TimeLog> {
     private String time_log_id;
     private String class_id;
     private String student_id;
@@ -94,6 +95,11 @@ public class TimeLog extends Model {
     @Override
     String getIdentifier() {
         return getTime_log_id();
+    }
+
+    @Override
+    TimeLog parseSnapshot(DataSnapshot snapshot) {
+        return snapshot.getValue(TimeLog.class);
     }
 
     @Override

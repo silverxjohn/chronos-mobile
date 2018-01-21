@@ -1,12 +1,13 @@
 package com.platacode.chronos.Models;
 
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 import com.platacode.chronos.App;
 import com.platacode.chronos.R;
 
 import java.util.Map;
 
-public class Role extends Model {
+public class Role extends Model<Role> {
     private UserRole role;
     private static Role roleInstance;
 
@@ -70,6 +71,11 @@ public class Role extends Model {
     @Override
     String getIdentifier() {
         return null;
+    }
+
+    @Override
+    Role parseSnapshot(DataSnapshot snapshot) {
+        return snapshot.getValue(Role.class);
     }
 
     @Override

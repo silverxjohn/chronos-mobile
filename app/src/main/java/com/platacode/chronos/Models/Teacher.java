@@ -1,12 +1,13 @@
 package com.platacode.chronos.Models;
 
+import com.google.firebase.database.DataSnapshot;
 import com.platacode.chronos.App;
 import com.platacode.chronos.R;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Teacher extends Model {
+public class Teacher extends Model<Teacher> {
     private String teacher_id;
     private String first_name;
     private String last_name;
@@ -83,6 +84,11 @@ public class Teacher extends Model {
     @Override
     String getIdentifier() {
         return getTeacher_id();
+    }
+
+    @Override
+    Teacher parseSnapshot(DataSnapshot snapshot) {
+        return snapshot.getValue(Teacher.class);
     }
 
     @Override
