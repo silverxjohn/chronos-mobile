@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.platacode.chronos.CreateSubjectActivity">
+
+    <include layout="@layout/toolbar_main"></include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/subject_name" />
+
+        <EditText
+            android:id="@+id/txtSubjectName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/subject_name_hint"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/subject_description" />
+
+        <EditText
+            android:id="@+id/txtSubjectDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/subject_description_hint" />
+
+        <TextView
+            android:id="@+id/txtUnits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/subject_units" />
+
+        <SeekBar
+            android:id="@+id/unitSeekbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:min="1"
+            android:max="5" />
+
+    </LinearLayout>
+
+</LinearLayout>

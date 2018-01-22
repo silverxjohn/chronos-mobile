@@ -6,6 +6,7 @@ import com.platacode.chronos.R;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class Subject extends Model<Subject> {
     private String subject_id;
@@ -15,6 +16,13 @@ public class Subject extends Model<Subject> {
 
     public Subject(String subject_id, String name, String description, String units) {
         this.subject_id = subject_id;
+        this.name = name;
+        this.description = description;
+        this.units = units;
+    }
+
+    public Subject(String name, String description, String units) {
+        this.subject_id = UUID.randomUUID().toString().replace("-", "").substring(0, 27);
         this.name = name;
         this.description = description;
         this.units = units;

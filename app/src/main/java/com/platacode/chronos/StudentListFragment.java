@@ -12,14 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 import com.platacode.chronos.Adapters.StudentAdapter;
 import com.platacode.chronos.Interfaces.Collector;
 import com.platacode.chronos.Models.Student;
 
-import java.util.ArrayList;
 import java.util.List;
 
 

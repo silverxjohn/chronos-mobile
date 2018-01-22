@@ -49,9 +49,14 @@
             android:label="@string/create_room_activity_title"
             android:parentActivityName=".MainActivity">
         </activity>
-        <activity android:name=".EditRoomActivity"
+        <activity
+            android:name=".EditRoomActivity"
             android:label="@string/edit_room_activity_title"
             android:parentActivityName=".MainActivity">
+        </activity>
+        <activity android:name=".CreateSubjectActivity">
+        </activity>
+        <activity android:name=".EditSubjectActivity">
         </activity>
     </application>
 
