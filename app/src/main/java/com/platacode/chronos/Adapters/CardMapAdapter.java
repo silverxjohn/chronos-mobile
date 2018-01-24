@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.MapView;
@@ -13,6 +14,8 @@ import com.platacode.chronos.DataContext;
 import com.platacode.chronos.Models.Coordinate;
 import com.platacode.chronos.Models.History;
 import com.platacode.chronos.R;
+import com.platacode.chronos.Utils.DownloadImageTask;
+import com.platacode.chronos.Utils.MapImageLinkGenerator;
 
 import java.util.ArrayList;
 
@@ -41,7 +44,8 @@ public class CardMapAdapter extends RecyclerView.Adapter<CardMapAdapter.ViewHold
         History history = histories.get(position);
         Coordinate coordinate = coordinates.get(position);
 
-//        MapView mapView = (MapView) cardView.findViewById(R.id.map_view);
+        ImageView imageView = (ImageView) cardView.findViewById(R.id.mapImageView);
+        new MapImageLinkGenerator(14.640173, 120.972679).setMapImageTo(imageView);
 
         TextView titleView = (TextView) cardView.findViewById(R.id.title);
         titleView.setText(history.getName());
