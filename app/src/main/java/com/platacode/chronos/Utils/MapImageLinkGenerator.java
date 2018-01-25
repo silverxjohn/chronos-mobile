@@ -29,6 +29,18 @@ public class MapImageLinkGenerator {
                 + "&key=" + apiKey;
     }
 
+    public MapImageLinkGenerator setHeight(int height) {
+        this.height = height;
+
+        return this;
+    }
+
+    public MapImageLinkGenerator setWidth(int width) {
+        this.width = width;
+
+        return this;
+    }
+
     public void setMapImageTo(ImageView imageView) {
         new DownloadImageTask(imageView).execute(generateUrl());
     }

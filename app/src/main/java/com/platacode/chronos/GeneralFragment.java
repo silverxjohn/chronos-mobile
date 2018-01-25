@@ -3,23 +3,18 @@ package com.platacode.chronos;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.github.vipulasri.timelineview.TimelineView;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.platacode.chronos.Adapters.TimeLineAdapter;
-import com.platacode.chronos.Models.OrderStatus;
-import com.platacode.chronos.Models.Orientation;
-import com.platacode.chronos.Models.TimeLineModel;
+import com.platacode.chronos.Adapters.ClassStepperAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
+import moe.feng.common.stepperview.VerticalStepperView;
 
 
 /**
@@ -27,7 +22,6 @@ import java.util.List;
  */
 public class GeneralFragment extends Fragment {
 
-    private Orientation mOrientation;
     private Context mContext;
 
 
@@ -42,30 +36,25 @@ public class GeneralFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_general, container, false);
 
-
-//        List<TimeLineModel> timelines = new ArrayList<TimeLineModel>();
-//        timelines.add(new TimeLineModel("English", "9:00", OrderStatus.ACTIVE));
-//        timelines.add(new TimeLineModel("Mathematics", "10:00", OrderStatus.ACTIVE));
-//        timelines.add(new TimeLineModel("History", "11:00", OrderStatus.ACTIVE));
-//
-//        mOrientation = Orientation.VERTICAL;
-//
-//        RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.time_marker);
-//        recyclerView.setLayoutManager(getLinearLayoutManager());
-//        recyclerView.setHasFixedSize(true);
-//
-//        TimeLineAdapter adapter = new TimeLineAdapter(timelines, Orientation.VERTICAL, true);
-//        recyclerView.setAdapter(adapter);
-
         return view;
     }
 
-    private LinearLayoutManager getLinearLayoutManager() {
-        if (mOrientation == Orientation.HORIZONTAL) {
-            return new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        } else {
-            return new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        }
-    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
+        final VerticalStepperView stepperView = (VerticalStepperView) getView().findViewById(R.id.classStepperView);
+
+        stepperView.setStepperAdapter(new ClassStepperAdapter());
+        stepperView.setActivatedColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+        stepperView.setNormalColor(ContextCompat.getColor(getContext(), R.color.colorGray));
+
+        FloatingActionButton fab = (FloatingActionButton) getView().findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stepperView.nextStep();
+            }
+        });
+    }
 }

@@ -1,8 +1,10 @@
 package com.platacode.chronos.Adapters;
 
 
+import android.content.res.Resources;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,13 +47,29 @@ public class CardMapAdapter extends RecyclerView.Adapter<CardMapAdapter.ViewHold
         Coordinate coordinate = coordinates.get(position);
 
         ImageView imageView = (ImageView) cardView.findViewById(R.id.mapImageView);
-        new MapImageLinkGenerator(14.640173, 120.972679).setMapImageTo(imageView);
+
+        new MapImageLinkGenerator(14.640173, 120.972679)
+                .setHeight(253)
+                .setWidth(458)
+                .setMapImageTo(imageView);
 
         TextView titleView = (TextView) cardView.findViewById(R.id.title);
         titleView.setText(history.getName());
 
         TextView descriptionView = (TextView) cardView.findViewById(R.id.description);
         descriptionView.setText(history.getCreatedAt());
+    }
+
+    public static int convertDpToPixel(float dp){
+        DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
+        float px = dp * (metrics.densityDpi / 160f);
+        return Math.round(px);
+    }
+
+    public static int getScreenWidth() {
+        DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
+
+        return metrics.widthPixels;
     }
 
     @Override
