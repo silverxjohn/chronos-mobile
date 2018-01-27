@@ -9,7 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.platacode.chronos.Adapters.CardMapAdapter;
+import com.platacode.chronos.Interfaces.Collector;
+import com.platacode.chronos.Models.TimeLog;
+
+import java.util.List;
 
 
 /**
@@ -26,10 +31,16 @@ public class HistoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        final RecyclerView recyclerView = (RecyclerView) inflater.inflate(R.layout.fragment_history, container, false);
 
-        RecyclerView recyclerView = (RecyclerView) inflater.inflate(R.layout.fragment_history, container, false);
-        CardMapAdapter adapter = new CardMapAdapter(DataContext.getCoordinates(), DataContext.getHistories());
-        recyclerView.setAdapter(adapter);
+        new TimeLog(FirebaseAuth.getInstance().getCurrentUser().getUid()).get(new Collector<TimeLog>() {
+            @Override
+            public void collect(List<TimeLog> items) {
+                CardMapAdapter adapter = new CardMapAdapter(items);
+                recyclerView.setAdapter(adapter);
+            }
+        });
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);

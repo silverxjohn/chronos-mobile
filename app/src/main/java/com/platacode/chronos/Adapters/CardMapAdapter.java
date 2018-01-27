@@ -1,7 +1,9 @@
 package com.platacode.chronos.Adapters;
 
 
+import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
@@ -13,23 +15,23 @@ import android.widget.TextView;
 
 import com.google.android.gms.maps.MapView;
 import com.platacode.chronos.DataContext;
+import com.platacode.chronos.Interfaces.Collector;
 import com.platacode.chronos.Models.Coordinate;
 import com.platacode.chronos.Models.History;
+import com.platacode.chronos.Models.TimeLog;
 import com.platacode.chronos.R;
 import com.platacode.chronos.Utils.DownloadImageTask;
 import com.platacode.chronos.Utils.MapImageLinkGenerator;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CardMapAdapter extends RecyclerView.Adapter<CardMapAdapter.ViewHolder> {
 
-    private ArrayList<Coordinate> coordinates;
+    private List<TimeLog> timelogs;
 
-    private ArrayList<History> histories;
-
-    public CardMapAdapter(ArrayList<Coordinate> coordinates, ArrayList<History> histories) {
-        this.coordinates = coordinates;
-        this.histories = histories;
+    public CardMapAdapter(List<TimeLog> timelogs) {
+        this.timelogs = timelogs;
     }
 
     @Override
@@ -42,22 +44,33 @@ public class CardMapAdapter extends RecyclerView.Adapter<CardMapAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final CardView cardView = holder.cardView;
+        final TimeLog timelog = timelogs.get(position);
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri gmmIntentUri = Uri.parse("google.streetview:cbll=" + timelog.getLatitude() + "," + timelog.getLongitude());
 
-        History history = histories.get(position);
-        Coordinate coordinate = coordinates.get(position);
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+
+                cardView.getContext().startActivity(mapIntent);
+            }
+        });
+
+        TimeLog timeLog = timelogs.get(position);
 
         ImageView imageView = (ImageView) cardView.findViewById(R.id.mapImageView);
 
-        new MapImageLinkGenerator(14.640173, 120.972679)
+        new MapImageLinkGenerator(Double.valueOf(timeLog.getLatitude()), Double.valueOf(timeLog.getLongitude()))
                 .setHeight(253)
-                .setWidth(458)
+                .setWidth(459)
                 .setMapImageTo(imageView);
 
         TextView titleView = (TextView) cardView.findViewById(R.id.title);
-        titleView.setText(history.getName());
+        titleView.setText(timeLog.getName());
 
         TextView descriptionView = (TextView) cardView.findViewById(R.id.description);
-        descriptionView.setText(history.getCreatedAt());
+        descriptionView.setText(timeLog.getCreated_at());
     }
 
     public static int convertDpToPixel(float dp){
@@ -74,7 +87,7 @@ public class CardMapAdapter extends RecyclerView.Adapter<CardMapAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return histories.size();
+        return timelogs.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

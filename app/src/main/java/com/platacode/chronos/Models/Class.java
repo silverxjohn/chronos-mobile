@@ -2,6 +2,7 @@ package com.platacode.chronos.Models;
 
 import com.google.firebase.database.DataSnapshot;
 import com.platacode.chronos.App;
+import com.platacode.chronos.Interfaces.SingleCollector;
 import com.platacode.chronos.R;
 
 import java.util.HashMap;
@@ -114,5 +115,9 @@ public class Class extends Model<Class> {
         classMap.put(App.getContext().getString(R.string.class_field_subject_id), getSubject_id());
 
         return classMap;
+    }
+
+    public void getTeacher(SingleCollector collector) {
+        new Teacher().find(getTeacher_id(), collector);
     }
 }

@@ -3,6 +3,7 @@ package com.platacode.chronos.Models;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 import com.platacode.chronos.App;
+import com.platacode.chronos.Interfaces.SingleCollector;
 import com.platacode.chronos.R;
 
 import java.util.HashMap;
@@ -55,11 +56,7 @@ public class Room extends Model<Room> {
 
     @Override
     public String toString() {
-        return "Room{" +
-                "room_id='" + room_id + '\'' +
-                ", number='" + number + '\'' +
-                ", college_id='" + college_id + '\'' +
-                '}';
+        return getNumber();
     }
 
     @Override
@@ -86,5 +83,9 @@ public class Room extends Model<Room> {
         room.put(App.getContext().getString(R.string.room_field_college_id), getCollege_id());
 
         return room;
+    }
+
+    public void getCollege(SingleCollector collector) {
+        new College().find(getCollege_id(), collector);
     }
 }

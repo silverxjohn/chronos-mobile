@@ -67,13 +67,7 @@ public class Teacher extends Model<Teacher> {
 
     @Override
     public String toString() {
-        return "Teacher{" +
-                "teacher_id='" + teacher_id + '\'' +
-                ", first_name='" + first_name + '\'' +
-                ", last_name='" + last_name + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+        return getFirst_name() + " " + getLast_name();
     }
 
     @Override

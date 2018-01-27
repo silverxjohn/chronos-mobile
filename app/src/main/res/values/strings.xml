@@ -12,6 +12,10 @@
     <string name="edit_parent_activity_title">Edit Parent</string>
     <string name="create_room_activity_title">Create Room</string>
     <string name="edit_room_activity_title">Edit Room</string>
+    <string name="create_subject_activity_title">Create Subject</string>
+    <string name="edit_subject_activity_title">Edit Subject</string>
+    <string name="create_class_activity_title">Create Class</string>
+    <string name="edit_class_activity_title">Edit Class</string>
 
     <string name="id_number">ID Number</string>
     <string name="id_hint">17-004-001</string>
@@ -37,11 +41,16 @@
     <string name="college_name">College:</string>
     <string name="room_number">Room:</string>
     <string name="room_number_hint">401</string>
-    <string name="subject_name">Name</string>
+    <string name="subject_name">Name:</string>
     <string name="subject_name_hint">English I</string>
-    <string name="subject_description">Description</string>
+    <string name="subject_description">Description:</string>
     <string name="subject_description_hint">This subject prepares student for English II</string>
-    <string name="subject_units">Units</string>
+    <string name="subject_units">Units:</string>
+    <string name="class_teacher">Teacher:</string>
+    <string name="class_room">Room:</string>
+    <string name="class_day">Day:</string>
+    <string name="class_time">Time:</string>
+    <string name="class_subject">Subject:</string>
 
     <string name="student_created">New Student Created!</string>
     <string name="student_updated">Student Information Updated!</string>
@@ -67,6 +76,11 @@
     <string name="subject_updated">Subject Information Updated!</string>
     <string name="subject_deleted">Subject Deleted!</string>
     <string name="subject_delete_confirm">Are you sure you want to delete this subject?</string>
+
+    <string name="class_created">New Class Created!</string>
+    <string name="class_updated">Class Information Updated!</string>
+    <string name="class_deleted">Class Deleted!</string>
+    <string name="class_delete_confirm">Are you sure you want to delete this class?</string>
 
     <string name="yes">Yes</string>
     <string name="no">No</string>

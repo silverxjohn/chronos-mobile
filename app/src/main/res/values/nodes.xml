@@ -90,6 +90,7 @@
     <string name="timelog_field_latitude">latitude</string>
     <string name="timelog_field_longitude">longitude</string>
     <string name="timelog_field_created_at">created_at</string>
+    <string name="timelog_field_name">name</string>
 
 
     <!-- ROLE NODE -->

@@ -6,7 +6,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.platacode.chronos.Interfaces.Collector;
+import com.platacode.chronos.Interfaces.SingleCollector;
 
+import java.lang.*;
+import java.lang.Class;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -46,6 +49,25 @@ public abstract class Model<T> {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
         reference.child(getDbNode()).addValueEventListener(listener);
+    }
+
+    public void find(String id, final SingleCollector collector) {
+        FirebaseDatabase.getInstance().getReference()
+                .child(getDbNode())
+                .child(id)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        T item = parseSnapshot(dataSnapshot);
+
+                        collector.collect(item);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
     }
 
     public void get(final Collector collector) {

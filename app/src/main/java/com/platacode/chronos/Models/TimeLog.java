@@ -1,7 +1,11 @@
 package com.platacode.chronos.Models;
 
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.platacode.chronos.App;
+import com.platacode.chronos.Interfaces.Collector;
 import com.platacode.chronos.R;
 
 import java.util.HashMap;
@@ -11,6 +15,7 @@ public class TimeLog extends Model<TimeLog> {
     private String time_log_id;
     private String class_id;
     private String student_id;
+    private String name;
     private String latitude;
     private String longitude;
     private String created_at;
@@ -22,6 +27,10 @@ public class TimeLog extends Model<TimeLog> {
         this.latitude = latitude;
         this.longitude = longitude;
         this.created_at = created_at;
+    }
+
+    public TimeLog(String student_id) {
+        this.student_id = student_id;
     }
 
     public TimeLog() {
@@ -55,12 +64,12 @@ public class TimeLog extends Model<TimeLog> {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
     public String getLongitude() {
         return longitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
     }
 
     public void setLongitude(String longitude) {
@@ -73,6 +82,14 @@ public class TimeLog extends Model<TimeLog> {
 
     public void setCreated_at(String created_at) {
         this.created_at = created_at;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -94,7 +111,7 @@ public class TimeLog extends Model<TimeLog> {
 
     @Override
     String getIdentifier() {
-        return getTime_log_id();
+        return getStudent_id();
     }
 
     @Override
@@ -112,7 +129,15 @@ public class TimeLog extends Model<TimeLog> {
         timelog.put(App.getContext().getString(R.string.timelog_field_latitude), getLatitude());
         timelog.put(App.getContext().getString(R.string.timelog_field_longitude), getLongitude());
         timelog.put(App.getContext().getString(R.string.timelog_field_created_at), getCreated_at());
+        timelog.put(App.getContext().getString(R.string.timelog_field_name), getName());
 
         return timelog;
+    }
+
+    @Override
+    public void addValueEventListener(ValueEventListener listener) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+
+        reference.child(getDbNode()).child(getStudent_id()).addValueEventListener(listener);
     }
 }

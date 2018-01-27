@@ -45,10 +45,7 @@ public class Day extends Model<Day> {
 
     @Override
     public String toString() {
-        return "Day{" +
-                "day_id='" + day_id + '\'' +
-                ", name='" + name + '\'' +
-                '}';
+        return getName();
     }
 
     @Override

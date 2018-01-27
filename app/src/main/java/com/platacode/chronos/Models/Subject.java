@@ -65,12 +65,7 @@ public class Subject extends Model<Subject> {
 
     @Override
     public String toString() {
-        return "Subject{" +
-                "subject_id='" + subject_id + '\'' +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", units='" + units + '\'' +
-                '}';
+        return getName();
     }
 
     @Override
