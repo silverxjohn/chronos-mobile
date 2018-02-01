@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.platacode.chronos.Interfaces.Collector;
+import com.platacode.chronos.Models.Class;
 import com.platacode.chronos.Models.Day;
 import com.platacode.chronos.Models.Room;
 import com.platacode.chronos.Models.Subject;
@@ -139,6 +140,28 @@ public class CreateClassActivity extends AppCompatActivity {
     }
 
     private void createClass() {
+        Spinner subjectSpinner = (Spinner) findViewById(R.id.subjectSpinner);
+        Subject subject = (Subject) subjectSpinner.getSelectedItem();
+
+        Spinner roomSpinner = (Spinner) findViewById(R.id.roomSpinner);
+        Room room = (Room) roomSpinner.getSelectedItem();
+
+        Spinner teacherSpinner = (Spinner) findViewById(R.id.teacherSpinner);
+        Teacher teacher = (Teacher) teacherSpinner.getSelectedItem();
+
+        Spinner daySpinner = (Spinner) findViewById(R.id.daySpinner);
+        Day day = (Day) daySpinner.getSelectedItem();
+
+        Class c = new Class(
+            teacher.getTeacher_id(),
+            room.getRoom_id(),
+            day.getDay_id(),
+            "",
+            subject.getSubject_id()
+        );
+
+        c.create();
+
         Toast.makeText(this, getString(R.string.class_created), Toast.LENGTH_SHORT).show();
 
         finish();

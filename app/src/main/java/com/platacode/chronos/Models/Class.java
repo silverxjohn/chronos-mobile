@@ -7,6 +7,7 @@ import com.platacode.chronos.R;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class Class extends Model<Class> {
     private String class_id;
@@ -18,6 +19,15 @@ public class Class extends Model<Class> {
 
     public Class(String class_id, String teacher_id, String room_id, String day_id, String time_id, String subject_id) {
         this.class_id = class_id;
+        this.teacher_id = teacher_id;
+        this.room_id = room_id;
+        this.day_id = day_id;
+        this.time_id = time_id;
+        this.subject_id = subject_id;
+    }
+
+    public Class(String teacher_id, String room_id, String day_id, String time_id, String subject_id) {
+        this.class_id = UUID.randomUUID().toString().replace("-", "").substring(0, 27);
         this.teacher_id = teacher_id;
         this.room_id = room_id;
         this.day_id = day_id;
