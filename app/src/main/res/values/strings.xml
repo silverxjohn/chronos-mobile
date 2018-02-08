@@ -92,4 +92,15 @@
     <string name="firebase_db_url">https://x8-voltaic-range-g.firebaseio.com/</string>
     <string name="firebase_api_key">AIzaSyDYNeJ9QthNGBfQKwHIUYhLU1vle_eJ-CU</string>
     <string name="firebase_api_id">1:559503614993:android:4ced93d6b8496a7c</string>
+
+    <string name="servicedesc">Some Description</string>
+    <string name="aiddescription">Some Description</string>
+
+    <string name="lorem">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eu ante vehicula, tincidunt ante ac, tempor ex. Mauris ut dui sapien. Phasellus dapibus elit ac sapien aliquet viverra. Etiam facilisis sagittis arcu ac eleifend. Fusce augue lectus, sollicitudin in tristique eget, rutrum in elit. Sed eget lectus ac lacus volutpat rutrum a ut ligula. Mauris eget scelerisque magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce feugiat augue ut tortor mollis scelerisque. Proin porta metus eget malesuada porta. Integer mattis ac sem id rhoncus. In molestie, metus sed fringilla auctor, ante libero venenatis purus, non vehicula arcu est eu justo. In sit amet feugiat nisi.
+
+Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean rutrum nisi sit amet convallis bibendum. In risus nisi, congue sit amet mollis quis, congue eget purus. Aliquam erat volutpat. Sed tristique, erat non bibendum ultricies, arcu felis lobortis quam, et porta justo ligula at erat. Praesent id faucibus nisi. Etiam erat nibh, interdum non euismod eget, cursus quis justo. In aliquam risus id rhoncus imperdiet. Maecenas vitae semper diam. Nullam eu iaculis nisi.
+
+Nulla eleifend nisl porta, hendrerit leo eget, ornare nisi. Proin ante diam, eleifend ac facilisis at, facilisis eu ligula. Cras quis ex est. Sed vel ex auctor, placerat ipsum dapibus, interdum lorem. Fusce ullamcorper vel nibh ac dictum. Vivamus sit amet vehicula sapien. Praesent feugiat mauris eu libero ullamcorper, et hendrerit mi rhoncus. Quisque justo lacus, suscipit eget mi et, convallis malesuada mi. Mauris semper faucibus magna consectetur auctor. Duis in purus sed dolor semper luctus. Quisque euismod laoreet suscipit. Morbi non accumsan lorem. Praesent sit amet metus porta, tristique dolor sit amet, finibus ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Integer consequat augue eget congue commodo. Proin fringilla cursus suscipit.
+    </string>
 </resources>

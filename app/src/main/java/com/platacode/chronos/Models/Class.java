@@ -1,11 +1,17 @@
 package com.platacode.chronos.Models;
 
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.platacode.chronos.App;
+import com.platacode.chronos.Interfaces.Collector;
 import com.platacode.chronos.Interfaces.SingleCollector;
 import com.platacode.chronos.R;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -129,5 +135,38 @@ public class Class extends Model<Class> {
 
     public void getTeacher(SingleCollector collector) {
         new Teacher().find(getTeacher_id(), collector);
+    }
+
+    public void getSubject(SingleCollector collector) {
+        new Subject().find(getSubject_id(), collector);
+    }
+
+    public void getStudents(final Collector collector) {
+        final List<Student> students = new ArrayList<>();
+
+        FirebaseDatabase.getInstance()
+                .getReference()
+                .child(App.getContext().getString(R.string.node_classes))
+                .child(getClass_id())
+                .child(App.getContext().getString(R.string.node_students))
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        students.clear();
+
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            Student student = snapshot.getValue(Student.class);
+
+                            students.add(student);
+                        }
+
+                        collector.collect(students);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
     }
 }

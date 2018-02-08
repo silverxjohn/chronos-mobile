@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,6 +24,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.platacode.chronos.Models.Role;
 import com.platacode.chronos.Models.UserRole;
+import com.platacode.chronos.Utils.Mac;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -48,12 +51,39 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+//                            checkMacAddress();
                             getUserRole();
                         } else {
                             Toast.makeText(LoginActivity.this, "Incorrect credentials", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+            }
+        });
+    }
+
+    private void checkMacAddress() {
+
+        FirebaseDatabase.getInstance().getReference().child("mac_addresses").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChild(Mac.get())) {
+                    Toast.makeText(LoginActivity.this, "Invalid Device", Toast.LENGTH_SHORT).show();
+
+                    FirebaseAuth.getInstance().signOut();
+                } else {
+                    FirebaseDatabase.getInstance().getReference()
+                            .child(getString(R.string.node_mac_addresses))
+                            .child(Mac.get())
+                            .setValue(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+                    getUserRole();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
     }

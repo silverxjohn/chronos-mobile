@@ -37,7 +37,8 @@ public class EditStudentActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
-    private void getUserData() {
+    private void
+    getUserData() {
         Intent intent = getIntent();
         String studentId = intent.getStringExtra(EXTRA_STUDENT_ID);
         FirebaseDatabase.getInstance().getReference()

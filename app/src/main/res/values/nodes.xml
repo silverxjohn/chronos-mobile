@@ -97,4 +97,6 @@
     <string name="node_roles">roles</string>
     <!-- ROLE FIELDS -->
 
+    <string name="node_mac_addresses">mac_addresses</string>
+
 </resources>

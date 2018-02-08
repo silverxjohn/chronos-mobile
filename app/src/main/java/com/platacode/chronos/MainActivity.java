@@ -1,6 +1,9 @@
 package com.platacode.chronos;
 
 import android.content.Intent;
+import android.nfc.NfcAdapter;
+import android.nfc.Tag;
+import android.nfc.tech.IsoDep;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -23,24 +26,48 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.platacode.chronos.Adapters.SectionsPagerAdapter;
+import com.platacode.chronos.IsoDep.Tranceiver;
 import com.platacode.chronos.Models.Role;
 import com.platacode.chronos.Models.Student;
 import com.platacode.chronos.Models.Teacher;
 import com.platacode.chronos.Models.UserRole;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, NfcAdapter.ReaderCallback, Tranceiver.OnMessageReceived {
+
+    private boolean isStudent;
+    private NfcAdapter nfcAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         if (Role.getRoleInstance().getAuthUserRole() == UserRole.teacher) {
+            isStudent = false;
             setContentView(R.layout.activity_main);
         } else if (Role.getRoleInstance().getAuthUserRole() == UserRole.student) {
             setContentView(R.layout.student_activity_main);
+            isStudent = true;
         }
 
+        nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+
         initializeComponents();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (this.isStudent)
+            nfcAdapter.disableReaderMode(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        if (this.isStudent)
+            nfcAdapter.disableReaderMode(this);
     }
 
     private void initializeComponents() {
@@ -84,11 +111,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Teacher teacher = snapshot.getValue(Teacher.class);
 
-                            TextView authName = (TextView) findViewById(R.id.authName);
-                            authName.setText(teacher.getFirst_name() + " " + teacher.getLast_name());
-
-                            TextView authNumber = (TextView) findViewById(R.id.authNumber);
-                            authNumber.setText(teacher.getEmail());
+//                            TextView authName = (TextView) findViewById(R.id.authName);
+//                            authName.setText(teacher.getFirst_name() + " " + teacher.getLast_name());
+//
+//                            TextView authNumber = (TextView) findViewById(R.id.authNumber);
+//                            authNumber.setText(teacher.getEmail());
 
                             break;
                         }
@@ -167,5 +194,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawerLayout.closeDrawer(GravityCompat.START);
         else
             super.onBackPressed();
+    }
+
+    @Override
+    public void onTagDiscovered(Tag tag) {
+        IsoDep isoDep = IsoDep.get(tag);
+        Tranceiver tranceiver = new Tranceiver(isoDep, this);
+        Thread thread = new Thread(tranceiver);
+        thread.start();
+    }
+
+    @Override
+    public void onMessage(byte[] message) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+            }
+        });
+    }
+
+    @Override
+    public void onError(Exception exception) {
+        onMessage(exception.getMessage().getBytes());
     }
 }

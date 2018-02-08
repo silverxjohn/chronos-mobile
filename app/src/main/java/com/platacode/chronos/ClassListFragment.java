@@ -10,6 +10,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+
+import com.platacode.chronos.Adapters.ClassAdapter;
+import com.platacode.chronos.Interfaces.Collector;
+import com.platacode.chronos.Models.Class;
+
+import java.util.List;
 
 
 /**
@@ -48,6 +55,16 @@ public class ClassListFragment extends Fragment {
     }
 
     private void displayClassList() {
+        final View v = getView();
 
+        new Class().get(new Collector<Class>() {
+            @Override
+            public void collect(List<Class> classes) {
+                ClassAdapter adapter = new ClassAdapter(v.getContext(), classes);
+
+                ListView listView = (ListView) v.findViewById(R.id.listview);
+                listView.setAdapter(adapter);
+            }
+        });
     }
 }
