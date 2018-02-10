@@ -99,12 +99,12 @@ public class Student extends Model<Student> {
     }
 
     @Override
-    String getDbNode() {
+    protected String getDbNode() {
         return App.getContext().getString(R.string.node_students);
     }
 
     @Override
-    String getIdentifier() {
+    protected String getIdentifier() {
         return getStudent_id();
     }
 

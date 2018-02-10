@@ -169,4 +169,22 @@ public class Class extends Model<Class> {
                     }
                 });
     }
+
+    public void addStudent(Student student) {
+        FirebaseDatabase.getInstance().getReference()
+                .child(App.getContext().getString(R.string.node_classes))
+                .child(getClass_id())
+                .child(App.getContext().getString(R.string.node_students))
+                .child(student.getStudent_id())
+                .setValue(student);
+    }
+
+    public void removeStudent(Student student) {
+        FirebaseDatabase.getInstance().getReference()
+                .child(App.getContext().getString(R.string.node_classes))
+                .child(getClass_id())
+                .child(App.getContext().getString(R.string.node_students))
+                .child(student.getIdentifier())
+                .removeValue();
+    }
 }

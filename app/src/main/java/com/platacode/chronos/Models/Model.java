@@ -45,6 +45,17 @@ public abstract class Model<T> {
                 .removeValue();
     }
 
+    public void addValueEventListener(ValueEventListener listener, boolean sync) {
+        if (sync) {
+            addValueEventListener(listener);
+            return;
+        }
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+
+        reference.child(getDbNode()).addListenerForSingleValueEvent(listener);
+    }
+
     public void addValueEventListener(ValueEventListener listener) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 

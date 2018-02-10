@@ -1,6 +1,7 @@
 package com.platacode.chronos;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.platacode.chronos.Adapters.StudentRecyclerAdapter;
@@ -32,6 +34,7 @@ public class EditClassActivity extends AppCompatActivity {
 
         initializeComponents();
         getClassData();
+        setupFab();
     }
 
     private void initializeComponents() {
@@ -68,9 +71,9 @@ public class EditClassActivity extends AppCompatActivity {
             public void collect(List<Student> students) {
                 RecyclerView studentRecycler = (RecyclerView) findViewById(R.id.student_recyler);
                 studentRecycler.setLayoutManager(new LinearLayoutManager(EditClassActivity.this));
+
                 StudentRecyclerAdapter adapter = new StudentRecyclerAdapter(students, EditClassActivity.this);
                 studentRecycler.setAdapter(adapter);
-
             }
         });
     }
@@ -96,5 +99,18 @@ public class EditClassActivity extends AppCompatActivity {
     private void editClass() {
         Toast.makeText(this, getString(R.string.class_updated), Toast.LENGTH_SHORT).show();
         finish();
+    }
+
+    private void setupFab() {
+        FloatingActionButton fab = (FloatingActionButton) this.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(EditClassActivity.this, SelectStudentActivity.class);
+                intent.putExtra(SelectStudentActivity.EXTRA_CLASS_ID, mClass.getClass_id());
+
+                startActivity(intent);
+            }
+        });
     }
 }
