@@ -23,6 +23,23 @@ public class Time extends Model<Time> {
     public static final String PM_6_7 = "13";
     public static final String PM_7_8 = "14";
 
+    private static final String[] times = {
+        "6:00 - 7:00 AM",
+        "7:00 - 8:00 AM",
+        "8:00 - 9:00 AM",
+        "9:00 - 10:00 AM",
+        "10:00 - 11:00 AM",
+        "11:00 - 12:00 PM",
+        "12:00 - 1:00 PM",
+        "1:00 - 2:00 PM",
+        "2:00 - 3:00 PM",
+        "3:00 - 4:00 PM",
+        "4:00 - 5:00 PM",
+        "5:00 - 6:00 PM",
+        "6:00 - 7:00 PM",
+        "7:00 - 8:00 PM",
+    };
+
     private String time_id;
     private String name;
 
@@ -48,6 +65,10 @@ public class Time extends Model<Time> {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public static String getTimeString(int index) {
+        return times[index - 1];
     }
 
     @Override

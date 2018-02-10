@@ -1,10 +1,17 @@
 package com.platacode.chronos.Models;
 
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.platacode.chronos.App;
+import com.platacode.chronos.Interfaces.Collector;
+import com.platacode.chronos.Interfaces.SingleCollector;
 import com.platacode.chronos.R;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Student extends Model<Student> {
@@ -125,5 +132,58 @@ public class Student extends Model<Student> {
         student.put(App.getContext().getString(R.string.student_field_phone), getPhone());
 
         return student;
+    }
+
+    public void getClasses(final Collector collector) {
+        FirebaseDatabase.getInstance().getReference()
+                .child(getDbNode())
+                .child(getIdentifier())
+                .child(App.getContext().getString(R.string.node_classes))
+                .child("1")
+                .orderByKey()
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        final List<Class.ClassCache> classes = new ArrayList<>();
+
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            for (DataSnapshot classSnapshot : snapshot.getChildren()) {
+                                final Class cls = classSnapshot.getValue(Class.class);
+                                classes.add(new Class.ClassCache(cls, Time.getTimeString(Integer.parseInt(cls.getTime_id()))));
+
+                                break;
+                            }
+                        }
+
+                        collector.collect(classes);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+    }
+
+    public void addClass(Class mClass) {
+        FirebaseDatabase.getInstance().getReference()
+                .child(getDbNode())
+                .child(getIdentifier())
+                .child(App.getContext().getString(R.string.node_classes))
+                .child(mClass.getDay_id())
+                .child(mClass.getTime_id())
+                .child(mClass.getClass_id())
+                .setValue(mClass);
+    }
+
+    public void removeClass(Class mClass) {
+        FirebaseDatabase.getInstance().getReference()
+                .child(getDbNode())
+                .child(getIdentifier())
+                .child(App.getContext().getString(R.string.node_classes))
+                .child(mClass.getDay_id())
+                .child(mClass.getTime_id())
+                .child(mClass.getClass_id())
+                .removeValue();
     }
 }

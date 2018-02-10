@@ -22,23 +22,26 @@ public class Class extends Model<Class> {
     private String day_id;
     private String time_id;
     private String subject_id;
+    private String subject_name;
 
-    public Class(String class_id, String teacher_id, String room_id, String day_id, String time_id, String subject_id) {
+    public Class(String class_id, String teacher_id, String room_id, String day_id, String time_id, String subject_id, String subject_name) {
         this.class_id = class_id;
         this.teacher_id = teacher_id;
         this.room_id = room_id;
         this.day_id = day_id;
         this.time_id = time_id;
         this.subject_id = subject_id;
+        this.subject_name = subject_name;
     }
 
-    public Class(String teacher_id, String room_id, String day_id, String time_id, String subject_id) {
+    public Class(String teacher_id, String room_id, String day_id, String time_id, String subject_id, String subject_name) {
         this.class_id = UUID.randomUUID().toString().replace("-", "").substring(0, 27);
         this.teacher_id = teacher_id;
         this.room_id = room_id;
         this.day_id = day_id;
         this.time_id = time_id;
         this.subject_id = subject_id;
+        this.subject_name = subject_name;
     }
 
     public Class() {
@@ -90,6 +93,14 @@ public class Class extends Model<Class> {
 
     public void setSubject_id(String subject_id) {
         this.subject_id = subject_id;
+    }
+
+    public String getSubject_name() {
+        return subject_name;
+    }
+
+    public void setSubject_name(String subject_name) {
+        this.subject_name = subject_name;
     }
 
     @Override
@@ -177,6 +188,8 @@ public class Class extends Model<Class> {
                 .child(App.getContext().getString(R.string.node_students))
                 .child(student.getStudent_id())
                 .setValue(student);
+
+        student.addClass(this);
     }
 
     public void removeStudent(Student student) {
@@ -186,5 +199,33 @@ public class Class extends Model<Class> {
                 .child(App.getContext().getString(R.string.node_students))
                 .child(student.getIdentifier())
                 .removeValue();
+
+        student.removeClass(this);
+    }
+
+    public static class ClassCache {
+        private Class mClass;
+        private String time;
+
+        public ClassCache(Class aClass, String time) {
+            mClass = aClass;
+            this.time = time;
+        }
+
+        public Class getClasss() {
+            return mClass;
+        }
+
+        public void setClass(Class aClass) {
+            mClass = aClass;
+        }
+
+        public String getTime() {
+            return time;
+        }
+
+        public void setTime(String time) {
+            this.time = time;
+        }
     }
 }

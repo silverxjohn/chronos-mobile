@@ -157,7 +157,8 @@ public class CreateClassActivity extends AppCompatActivity {
             room.getRoom_id(),
             day.getDay_id(),
             "",
-            subject.getSubject_id()
+            subject.getSubject_id(),
+            subject.getName()
         );
 
         c.create();

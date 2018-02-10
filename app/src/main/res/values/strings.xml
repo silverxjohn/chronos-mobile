@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Chronos</string>
-    <string name="general_tab">General</string>
+    <string name="general_tab">Today</string>
     <string name="history_tab">History</string>
 
     <string name="user_name">John Doe</string>

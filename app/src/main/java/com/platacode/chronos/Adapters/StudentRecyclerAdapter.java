@@ -24,7 +24,7 @@ public class StudentRecyclerAdapter extends RecyclerView.Adapter<StudentRecycler
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_2, null);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.list_item_2, null);
         ViewHolder viewHolder = new ViewHolder(view);
 
         return viewHolder;
