@@ -14,7 +14,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.platacode.chronos.Interfaces.Collector;
+import com.platacode.chronos.Models.Class;
 import com.platacode.chronos.Models.Student;
+
+import java.util.List;
 
 public class EditStudentActivity extends AppCompatActivity {
 
@@ -120,6 +124,20 @@ public class EditStudentActivity extends AppCompatActivity {
         student.setId_number(idNumber.getText().toString());
 
         student.saveChanges();
+
+        student.getClasses(new Collector<Class.ClassCache>() {
+            @Override
+            public void collect(List<Class.ClassCache> classes) {
+                for (Class.ClassCache mClass : classes) {
+                    FirebaseDatabase.getInstance().getReference()
+                            .child(App.getContext().getString(R.string.node_classes))
+                            .child(mClass.getClasss().getClass_id())
+                            .child(App.getContext().getString(R.string.node_students))
+                            .child(student.getStudent_id())
+                            .setValue(student);
+                }
+            }
+        });
 
         Toast.makeText(this, getString(R.string.student_updated), Toast.LENGTH_SHORT).show();
         finish();
