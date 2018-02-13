@@ -103,4 +103,5 @@ Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculu
 
 Nulla eleifend nisl porta, hendrerit leo eget, ornare nisi. Proin ante diam, eleifend ac facilisis at, facilisis eu ligula. Cras quis ex est. Sed vel ex auctor, placerat ipsum dapibus, interdum lorem. Fusce ullamcorper vel nibh ac dictum. Vivamus sit amet vehicula sapien. Praesent feugiat mauris eu libero ullamcorper, et hendrerit mi rhoncus. Quisque justo lacus, suscipit eget mi et, convallis malesuada mi. Mauris semper faucibus magna consectetur auctor. Duis in purus sed dolor semper luctus. Quisque euismod laoreet suscipit. Morbi non accumsan lorem. Praesent sit amet metus porta, tristique dolor sit amet, finibus ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Integer consequat augue eget congue commodo. Proin fringilla cursus suscipit.
     </string>
+    <string name="title_activity_teacher_main">TeacherMainActivity</string>
 </resources>

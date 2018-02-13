@@ -16,6 +16,16 @@ public class Day extends Model<Day> {
     public final static String FRIDAY = "5";
     public final static String SATURDAY = "6";
 
+    private final static String[] days = {
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+    };
+
     private String day_id;
     private String name;
 
@@ -71,5 +81,9 @@ public class Day extends Model<Day> {
         day.put(App.getContext().getString(R.string.day_field_name), getName());
 
         return day;
+    }
+
+    public static String getDayString(int index) {
+        return days[index];
     }
 }

@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (Role.getRoleInstance().getAuthUserRole() == UserRole.teacher) {
+        if (Role.getRoleInstance().getAuthUserRole() == UserRole.admin) {
             isStudent = false;
             setContentView(R.layout.activity_main);
         } else if (Role.getRoleInstance().getAuthUserRole() == UserRole.student) {
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        if (Role.getRoleInstance().getAuthUserRole() == UserRole.teacher) {
+        if (Role.getRoleInstance().getAuthUserRole() == UserRole.admin) {
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.nav_open_drawer, R.string.nav_close_drawer);
             drawer.addDrawerListener(toggle);

@@ -152,6 +152,10 @@ public class Class extends Model<Class> {
         new Subject().find(getSubject_id(), collector);
     }
 
+    public void getRoom(SingleCollector collector) {
+        new Room().find(getRoom_id(), collector);
+    }
+
     public void getStudents(final Collector collector) {
         final List<Student> students = new ArrayList<>();
 

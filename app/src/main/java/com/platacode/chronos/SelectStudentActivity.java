@@ -43,7 +43,7 @@ public class SelectStudentActivity extends AppCompatActivity {
     }
 
     private void setUpListView() {
-        final ListView listView = (ListView) findViewById(R.id.listview);
+        final ListView listView = (ListView) findViewById(R.id.recylerView);
         final List<StudentWrapper> wrappedStudents = new ArrayList<>();
 
         new Student().get(new Collector<Student>() {

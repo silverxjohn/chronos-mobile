@@ -91,38 +91,42 @@ public class LoginActivity extends AppCompatActivity {
     private void getUserRole() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
 
-        Query query = ref.child(App.getContext().getString(R.string.node_roles))
-                .orderByKey().equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        ref.child(App.getContext().getString(R.string.node_roles)).orderByKey()
+                .equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
 
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    if (snapshot.getValue().toString().equals("1"))
-                        Role.getRoleInstance().setRole(UserRole.student);
-                    else if (snapshot.getValue().toString().equals("2"))
-                        Role.getRoleInstance().setRole(UserRole.teacher);
-                    else if (snapshot.getValue().toString().equals("3"))
-                        Role.getRoleInstance().setRole(UserRole.admin);
+                            if (snapshot.getValue().toString().equals("1"))
+                                Role.getRoleInstance().setRole(UserRole.student);
+                            else if (snapshot.getValue().toString().equals("2"))
+                                Role.getRoleInstance().setRole(UserRole.teacher);
+                            else if (snapshot.getValue().toString().equals("3"))
+                                Role.getRoleInstance().setRole(UserRole.admin);
 
-                    break;
-                }
+                            break;
+                        }
 
-                performRedirect();
-            }
+                        performRedirect();
+                    }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+                    }
+                });
     }
 
     private void performRedirect() {
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-
-        startActivity(intent);
+        if (Role.getRoleInstance().getAuthUserRole() == UserRole.teacher) {
+            Intent intent = new Intent(LoginActivity.this, TeacherMainActivity.class);
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
 
         finish();
     }

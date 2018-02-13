@@ -10,6 +10,7 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,15 +38,29 @@ public class CardMapAdapter extends RecyclerView.Adapter<CardMapAdapter.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         CardView cardView = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.card_map, parent, false);
+        Button button = (Button) cardView.findViewById(R.id.button2);
 
-        return new ViewHolder(cardView);
+        return new ViewHolder(cardView, button);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final CardView cardView = holder.cardView;
+        final  Button button = holder.button;
         final TimeLog timelog = timelogs.get(position);
         cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri gmmIntentUri = Uri.parse("google.streetview:cbll=" + timelog.getLatitude() + "," + timelog.getLongitude());
+
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+
+                cardView.getContext().startActivity(mapIntent);
+            }
+        });
+
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Uri gmmIntentUri = Uri.parse("google.streetview:cbll=" + timelog.getLatitude() + "," + timelog.getLongitude());
@@ -93,10 +108,15 @@ public class CardMapAdapter extends RecyclerView.Adapter<CardMapAdapter.ViewHold
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private CardView cardView;
+        private Button button;
 
-        public ViewHolder(CardView cardView) {
+        public ViewHolder(CardView cardView, Button button) {
             super(cardView);
             this.cardView = cardView;
+            this.button = button;
         }
     }
 }
+
+
+
