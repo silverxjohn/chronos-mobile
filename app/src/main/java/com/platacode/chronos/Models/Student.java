@@ -9,7 +9,12 @@ import com.platacode.chronos.Interfaces.Collector;
 import com.platacode.chronos.Interfaces.SingleCollector;
 import com.platacode.chronos.R;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -135,11 +140,12 @@ public class Student extends Model<Student> {
     }
 
     public void getClasses(final Collector collector) {
+
         FirebaseDatabase.getInstance().getReference()
                 .child(getDbNode())
                 .child(getIdentifier())
                 .child(App.getContext().getString(R.string.node_classes))
-                .child("1")
+                .child(String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_WEEK)))
                 .orderByKey()
                 .addValueEventListener(new ValueEventListener() {
                     @Override
@@ -148,7 +154,7 @@ public class Student extends Model<Student> {
 
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             for (DataSnapshot classSnapshot : snapshot.getChildren()) {
-                                final Class cls = classSnapshot.getValue(Class.class);
+                                Class cls = classSnapshot.getValue(Class.class);
                                 classes.add(new Class.ClassCache(cls, Time.getTimeString(Integer.parseInt(cls.getTime_id()))));
 
                                 break;

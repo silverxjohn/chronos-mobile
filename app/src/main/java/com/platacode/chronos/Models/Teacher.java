@@ -1,10 +1,17 @@
 package com.platacode.chronos.Models;
 
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.platacode.chronos.App;
+import com.platacode.chronos.Interfaces.Collector;
 import com.platacode.chronos.R;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Teacher extends Model<Teacher> {
@@ -96,5 +103,32 @@ public class Teacher extends Model<Teacher> {
         teacher.put(App.getContext().getString(R.string.teacher_field_email), getEmail());
 
         return teacher;
+    }
+
+    public void getClasses(final Collector collector) {
+        FirebaseDatabase.getInstance().getReference()
+                .child(getDbNode())
+                .child(getIdentifier())
+                .child(App.getContext().getString(R.string.node_classes))
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        final List<Class> classes = new ArrayList<>();
+
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            Class cls = snapshot.getValue(Class.class);
+
+                            classes.add(cls);
+                        }
+
+                        collector.collect(classes);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
     }
 }

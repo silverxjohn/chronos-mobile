@@ -9,9 +9,12 @@ import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.platacode.chronos.Adapters.CardClassAdapter;
 import com.platacode.chronos.Interfaces.Collector;
+import com.platacode.chronos.Interfaces.SingleCollector;
 import com.platacode.chronos.Models.Class;
+import com.platacode.chronos.Models.Teacher;
 
 import java.util.List;
 
@@ -26,13 +29,18 @@ public class TeacherMainActivity extends AppCompatActivity {
 
         final RecyclerView recyclerView = findViewById(R.id.recylerView);
 
-        new Class().get(new Collector<Class>() {
+        new Teacher().find(FirebaseAuth.getInstance().getCurrentUser().getUid(), new SingleCollector<Teacher>() {
             @Override
-            public void collect(List<Class> classes) {
-                CardClassAdapter adapter = new CardClassAdapter(TeacherMainActivity.this, classes);
+            public void collect(Teacher teacher) {
+                teacher.getClasses(new Collector<Class>() {
+                    @Override
+                    public void collect(List<Class> classes) {
+                        CardClassAdapter adapter = new CardClassAdapter(TeacherMainActivity.this, classes);
 
-                recyclerView.setLayoutManager(new LinearLayoutManager(TeacherMainActivity.this));
-                recyclerView.setAdapter(adapter);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(TeacherMainActivity.this));
+                        recyclerView.setAdapter(adapter);
+                    }
+                });
             }
         });
     }

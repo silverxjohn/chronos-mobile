@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.FirebaseDatabase;
 import com.platacode.chronos.Interfaces.Collector;
 import com.platacode.chronos.Models.Class;
 import com.platacode.chronos.Models.Day;
@@ -162,6 +163,13 @@ public class CreateClassActivity extends AppCompatActivity {
         );
 
         c.create();
+
+        FirebaseDatabase.getInstance().getReference()
+                .child(App.getContext().getString(R.string.node_teachers))
+                .child(teacher.getTeacher_id())
+                .child(App.getContext().getString(R.string.node_classes))
+                .child(c.getClass_id())
+                .setValue(c);
 
         Toast.makeText(this, getString(R.string.class_created), Toast.LENGTH_SHORT).show();
 
