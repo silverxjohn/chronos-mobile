@@ -12,4 +12,5 @@
     <string name="nav_create">Create</string>
     <string name="nav_assign_parent">Assign Parent</string>
     <string name="nav_edit_class">Edit Class</string>
+    <string name="nav_logout">Logout</string>
 </resources>
