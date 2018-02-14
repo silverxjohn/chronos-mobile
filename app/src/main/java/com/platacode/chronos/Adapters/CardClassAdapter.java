@@ -1,6 +1,7 @@
 package com.platacode.chronos.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import com.platacode.chronos.Models.Room;
 import com.platacode.chronos.Models.Subject;
 import com.platacode.chronos.Models.Time;
 import com.platacode.chronos.R;
+import com.platacode.chronos.TeacherClassActivity;
 
 import java.util.List;
 
@@ -67,7 +69,10 @@ public class CardClassAdapter extends RecyclerView.Adapter<CardClassAdapter.View
         holder.btnViewClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(mContext, TeacherClassActivity.class);
+                intent.putExtra(TeacherClassActivity.EXTRA_CLASS_ID, mClass.getClass_id());
 
+                mContext.startActivity(intent);
             }
         });
     }
