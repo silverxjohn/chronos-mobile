@@ -82,6 +82,9 @@ public class EditSubjectActivity extends AppCompatActivity {
             case R.id.create_menu:
                 editSubject();
                 return true;
+            case android.R.id.home:
+                finish();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

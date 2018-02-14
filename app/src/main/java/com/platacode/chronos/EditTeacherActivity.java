@@ -89,6 +89,9 @@ public class EditTeacherActivity extends AppCompatActivity {
             case R.id.create_menu:
                 editTeacher();
                 return true;
+            case android.R.id.home:
+                finish();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -94,6 +94,9 @@ public class EditClassActivity extends AppCompatActivity {
             case R.id.edit_class_menu:
                 editClass();
                 return true;
+            case android.R.id.home:
+                finish();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

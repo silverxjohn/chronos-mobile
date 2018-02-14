@@ -103,6 +103,9 @@ public class EditRoomActivity extends AppCompatActivity {
             case R.id.create_menu:
                 editRoom();
                 return true;
+            case android.R.id.home:
+                finish();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

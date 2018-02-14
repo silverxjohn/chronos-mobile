@@ -99,6 +99,9 @@ public class EditStudentActivity extends AppCompatActivity {
             case R.id.assign_parent_menu:
                 assignParent();
                 return true;
+            case android.R.id.home:
+                finish();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

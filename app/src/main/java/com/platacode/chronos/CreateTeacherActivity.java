@@ -50,6 +50,9 @@ public class CreateTeacherActivity extends AppCompatActivity {
             case R.id.create_menu:
                 createTeacher();
                 return true;
+            case android.R.id.home:
+                finish();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

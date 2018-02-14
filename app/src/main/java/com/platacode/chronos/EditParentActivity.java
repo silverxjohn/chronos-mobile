@@ -114,6 +114,9 @@ public class EditParentActivity extends AppCompatActivity {
                 else
                     createParent();
                 return true;
+            case android.R.id.home:
+                finish();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

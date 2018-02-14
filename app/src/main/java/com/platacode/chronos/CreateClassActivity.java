@@ -135,6 +135,9 @@ public class CreateClassActivity extends AppCompatActivity {
             case R.id.create_menu:
                 createClass();
                 return true;
+            case android.R.id.home:
+                finish();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
