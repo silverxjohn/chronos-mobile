@@ -31,6 +31,11 @@ public class Role extends Model<Role> {
         }
     }
 
+    public void resetRole() {
+        this.hasModified = false;
+        this.role = null;
+    }
+
     public void createRole(Student student) {
         FirebaseDatabase.getInstance().getReference()
                 .child(getDbNode())

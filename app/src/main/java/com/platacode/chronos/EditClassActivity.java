@@ -11,8 +11,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import com.platacode.chronos.Adapters.StudentAdapter;
 import com.platacode.chronos.Adapters.StudentRecyclerAdapter;
 import com.platacode.chronos.Interfaces.Collector;
 import com.platacode.chronos.Interfaces.SingleCollector;
@@ -69,10 +71,11 @@ public class EditClassActivity extends AppCompatActivity {
         mClass.getStudents(new Collector<Student>() {
             @Override
             public void collect(List<Student> students) {
-                RecyclerView studentRecycler = (RecyclerView) findViewById(R.id.student_recyler);
-                studentRecycler.setLayoutManager(new LinearLayoutManager(EditClassActivity.this));
+                ListView studentRecycler = (ListView) findViewById(R.id.student_recyler);
+//                studentRecycler.setLayoutManager(new LinearLayoutManager(EditClassActivity.this));
 
-                StudentRecyclerAdapter adapter = new StudentRecyclerAdapter(students, EditClassActivity.this);
+//                StudentRecyclerAdapter adapter = new StudentRecyclerAdapter(students, EditClassActivity.this);
+                StudentAdapter adapter = new StudentAdapter(EditClassActivity.this, students);
                 studentRecycler.setAdapter(adapter);
             }
         });

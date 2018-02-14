@@ -1,5 +1,7 @@
 package com.platacode.chronos.Models;
 
+import android.util.Log;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -145,7 +147,7 @@ public class Student extends Model<Student> {
                 .child(getDbNode())
                 .child(getIdentifier())
                 .child(App.getContext().getString(R.string.node_classes))
-                .child(String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_WEEK)))
+                .child(String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 1))
                 .orderByKey()
                 .addValueEventListener(new ValueEventListener() {
                     @Override

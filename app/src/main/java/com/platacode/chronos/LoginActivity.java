@@ -37,6 +37,8 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
+        Role.getRoleInstance().resetRole();
+
         setContentView(R.layout.activity_login);
 
         try {
@@ -78,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (dataSnapshot.hasChild(Mac.get())) {
                     Toast.makeText(LoginActivity.this, "Invalid Device", Toast.LENGTH_SHORT).show();
 
+                    Role.getRoleInstance().resetRole();
                     FirebaseAuth.getInstance().signOut();
                 } else {
                     FirebaseDatabase.getInstance().getReference()
